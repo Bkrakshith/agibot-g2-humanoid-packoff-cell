@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>agibot-g2-humanoid-packoff-cell: AgiBot G2 End-of-Line Packing for Flexible, Sealed Bags</title>
+  <meta name="description" content="agibot-g2-humanoid-packoff-cell is a simulated end-of-line packing cell for the AgiBot G2 humanoid. The robot picks flexible, sealed bags and packs them into cartons. It gives teleoperation, scripted data generation, a data recorder and a training pipeline.">
+  <meta property="og:title" content="agibot-g2-humanoid-packoff-cell: AgiBot G2 End-of-Line Packing for Flexible, Sealed Bags">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://bkrakshith.github.io/agibot-g2-humanoid-packoff-cell/">
+  <meta property="og:description" content="A simulated pack-off cell where an AgiBot G2 humanoid packs flexible, sealed bags into cartons. Genie Sim and Isaac Sim, headless in Docker. Tested in simulation only.">
+  <meta property="og:image" content="https://bkrakshith.github.io/agibot-g2-humanoid-packoff-cell/static/videos/01_packing_overview.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="canonical" href="https://bkrakshith.github.io/agibot-g2-humanoid-packoff-cell/">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <link rel="stylesheet" href="static/css/site.css">
+</head>
+<body>
+
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop has-text-centered">
+      <h1 class="title publication-title">agibot-g2-humanoid-packoff-cell</h1>
+      <p class="publication-subtitle">AgiBot G2 end-of-line packing for flexible, sealed bags</p>
+      <p class="publication-authors">Built by: <a href="https://github.com/Bkrakshith">Rakshith Bangalore Kumaraswamy</a></p>
+      <div class="link-buttons">
+        <a class="button is-dark is-rounded" href="https://github.com/Bkrakshith/agibot-g2-humanoid-packoff-cell"><span class="icon"><i class="fab fa-github"></i></span><span>Code</span></a>
+        <a class="button is-dark is-rounded" href="#packages"><span class="icon"><i class="fas fa-cubes"></i></span><span>Packages</span></a>
+      </div>
+      <span class="status-badge">repository: agibot-g2-humanoid-packoff-cell &middot; simulation stage</span>
+    </div>
+  </div>
+</section>
+
+<nav class="section-nav">
+  <div class="container">
+    <a href="#overview">Overview</a><a href="#cell">Cell</a><a href="#packing">Packing</a>
+    <a href="#data">Teleoperation and data</a><a href="#training">Training</a><a href="#mobility">Mobility</a>
+    <a href="#status">Status</a><a href="#disclaimer">Disclaimer</a>
+  </div>
+</nav>
+
+<section class="section" id="overview">
+  <div class="container is-max-desktop">
+    <div class="feature-video"><figure class="clip"><video width="1280" height="720" data-autoplay muted loop playsinline preload="none" poster="static/videos/01_packing_overview.jpg"><source src="static/videos/01_packing_overview.mp4" type="video/mp4"></video><figcaption><span class="clip-title">Packing cycle in the U cell.</span> <span class="clip-sub">One continuous take, Isaac Sim 6.0.1 through Genie Sim.</span> The G2 drives into the U cell. It picks a bag from the table with the left arm and places it over the open carton on the conveyor. Then it moves the right arm to a tote in the sort rack.<details><summary>Details</summary><ul><li>The drive-in is 2.0 m in 10.3 s. The final position error is 0.57 cm and 0.00°.</li><li>The waist turns first: +55° to the table, 0° to the carton, -95° to the rack. Then the arm moves.</li><li>The base holds its position on odometry while the arms move. The base drift is 0.43 cm and 0.07°.</li><li>The edit removes the planning time. The clip is 67.8 s at 12 frames per second.</li><li>This take was recorded before the object pose relay. The bag stays at its start position on camera, and the grasp is symbolic. Refer to the pilot dataset below for a take where the bag moves.</li></ul></details></figcaption></figure></div>
+    <h2 class="title is-3 has-text-centered">Overview</h2>
+    <div class="content has-text-justified lead">
+      <p>agibot-g2-humanoid-packoff-cell is a simulated work cell for a humanoid robot at the end of a packing line. The products
+      are flexible, sealed bags, for example bags of salad leaves, bags of crisps and other pillow packs. The robot
+      picks the bags from a table and puts them into cartons on a conveyor. It puts rejected bags into totes in a sort
+      rack.</p>
+      <p>Pack-off is a manual task in many fresh-produce and snack factories. The cell lets a team develop the robot
+      tasks, collect demonstration data and train policies before a test on a real line.</p>
+      <p>The reference robot is the AgiBot G2. It has a wheeled base, a waist, two 7-DoF arms with grippers and a head
+      RGB-D camera. The cell runs on AgiBot Genie Sim 3.2 with NVIDIA Isaac Sim 6.0.1. It runs headless in Docker, so
+      it runs on a workstation or on a cloud GPU server.</p>
+      <p>The bags in the simulation are rigid placeholders at this stage. Deformable bags are a next step.
+      <strong>All tests used simulation only.</strong> No test on a real robot is complete.</p>
+    </div>
+    <h3 class="title is-4 has-text-centered" style="margin-top:2rem">What the cell supports</h3>
+    <div class="content">
+      <ul>
+        <li>Develop pick, place and sort tasks for a wheeled dual-arm humanoid.</li>
+        <li>Teleoperate the arms from a keyboard over SSH, or with a SpaceMouse.</li>
+        <li>Generate demonstration episodes with a script, with random bag positions.</li>
+        <li>Record synchronised camera, joint and command data, and convert it to HDF5.</li>
+        <li>Train and evaluate imitation-learning policies on the recorded episodes.</li>
+        <li>Test mapping and navigation with the mobile base.</li>
+      </ul>
+    </div>
+    <h3 class="title is-4 has-text-centered" style="margin-top:2rem">System architecture</h3>
+    <img class="figure-img" src="static/images/architecture.svg" alt="System architecture. Teleoperation, the episode generator and the task servers send requests to the motion server. The motion server is the only node that sends joint commands to the Genie Sim engine. The recorder writes the simulation data to HDF5, and the learning package trains on it.">
+    <div class="content" style="margin-top:1rem">
+      <ul>
+        <li><strong>One joint command publisher.</strong> All inputs go through the motion server. It solves the arm
+        poses with MoveIt, checks each path against the head camera and the cell fixtures, and sends smooth joint
+        paths at 50 Hz.</li>
+        <li><strong>Robot interface names.</strong> A simulated version of the AgiBot GDK interface runs on Genie Sim.
+        11 of 11 GDK acceptance tests pass against the simulation. Use-case code that uses the GDK names can then run
+        on the real robot with no change.</li>
+        <li><strong>One cell file.</strong> One Python generator makes the cell scene and the list of colliders. The
+        planner and the tests use the same list. 199 asset tests check the layout.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="section alt" id="cell">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3">Cell</h2>
+    <div class="content">
+      <p>The cell is a U shape. The pick table is on the left, the conveyor is at the front and the sort rack is on
+      the right. The G2 drives into the open side of the U. The clearance is 0.112 m on each side of the chassis.</p>
+      <p>The line has a case erector, open cartons on the conveyor, a drop gap with a floor bin, a right-angle
+      transfer, a case sealer and a cobot palletiser. The light level at the robot is approximately 1470 lux.</p>
+      <p>Upstream Genie Sim sends only the robot poses to the renderer. Thus objects that physics moves stay at their
+      start position on camera. The object pose relay adds one hook to the engine. It sends the poses of the bags,
+      cartons and totes to the renderer at 25 Hz. Its cost is approximately 0.05 ms for each physics step.</p>
+    </div>
+    <div class="figure-pair">
+      <figure class="clip">
+        <img src="static/images/cell_table.png" alt="Close view of the pick table with two green bags, the conveyor with open cartons and the G2">
+        <figcaption><span class="clip-title">Before.</span> <span class="clip-sub">Two bags on the pick table.</span></figcaption>
+      </figure>
+      <figure class="clip">
+        <img src="static/images/relay_dropped.png" alt="The same view after a bag was pushed off the table. The bag is on the floor next to the table.">
+        <figcaption><span class="clip-title">After.</span> <span class="clip-sub">A test pushed one bag off the table.
+        The camera shows it on the floor, where physics put it.</span></figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="packing">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3">Packing</h2>
+    <div class="content">
+      <p>The packing demo drives the G2 into the cell on odometry. Then it plans each arm move with MoveIt. The waist
+      turns to the work area first, and then the arm moves. While the arms move, the base holds its position.
+      Without this hold, a reach can push the free base by up to 23 cm.</p>
+      <p>The planner rejects a path if an arm comes nearer than 0.20 m to the head camera, or nearer than 0.015 m to a
+      fixture.</p>
+    </div>
+    <figure class="clip"><video width="640" height="400" data-autoplay muted loop playsinline preload="none" poster="static/videos/02_packing_head.jpg"><source src="static/videos/02_packing_head.mp4" type="video/mp4"></video><figcaption><span class="clip-title">Head camera view.</span> <span class="clip-sub">What the robot sees, 640 × 400.</span> This is the head camera of the G2 during the same take. The data recorder and the training use this view.<details><summary>Details</summary><ul><li>The camera is on the official G2 head mount.</li><li>The arm paths stay a minimum of 0.20 m from the head camera. The arm colliders of the G2 are off in Genie Sim, so the planner does this check.</li></ul></details></figcaption></figure>
+  </div>
+</section>
+
+<section class="section alt" id="data">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3">Teleoperation and data</h2>
+    <div class="content">
+      <p>The keyboard teleoperation works over SSH. The operator selects an arm and moves its tool in steps of 1 to
+      50 mm. The node solves the joint positions with MoveIt. The operator can also turn the waist, close the grippers
+      and start or stop a recording. A SpaceMouse gives the same functions.</p>
+      <p>The recorder writes an MCAP bag. Then it converts the bag to HDF5 with the head RGB and depth frames, the
+      joint states, the joint commands and a group resampled to 30 Hz. The default profile writes approximately
+      1.1 MB/s, not 78 MB/s for the raw streams.</p>
+      <p>The episode generator makes demonstrations with a script. It sets a random bag, position and yaw in the
+      reachable area, resets the scene, runs the pick task and records the result.</p>
+    </div>
+    <figure class="clip"><video width="1920" height="1080" data-autoplay muted loop playsinline preload="none" poster="static/videos/03_teleop_replay.jpg"><source src="static/videos/03_teleop_replay.mp4" type="video/mp4"></video><figcaption><span class="clip-title">Recorded teleoperation episode.</span> <span class="clip-sub">Kinematic replay from the HDF5 file.</span> An operator moved the arms with the keyboard. The recorder wrote the joint states, the joint commands and the camera frames. This replay draws the robot again from the recorded data.<details><summary>Details</summary><ul><li>Left: the robot model, with the recorded joint positions.</li><li>Centre: the head camera and the free camera frames from the episode.</li><li>Right: the left-arm joints. Grey is measured. Dark blue is the command. The commands and the measured joints agree within 0.0012 rad.</li><li>This episode is from the first, simpler scene with crates and totes.</li><li>There is no policy in this clip. It shows the recorded motion only.</li></ul></details></figcaption></figure>
+    <h3 class="title is-4" style="margin-top:1rem">Pilot dataset</h3>
+    <div class="content">
+      <ul>
+        <li>20 of 20 episodes are successful. A scorer reads the bag position after each episode. All 20 bags are in
+        the carton.</li>
+        <li>One episode takes 42.4 s of wall time. Physics stays at 99.7 Hz and the head camera at 30 Hz during data
+        generation.</li>
+        <li>The grasp uses an attach and release at this stage, because a gripper cannot hold the rigid placeholder
+        bag.</li>
+      </ul>
+    </div>
+    <img class="figure-img" src="static/images/pilot_events.png" alt="Six head camera frames from one pilot episode: start, grasp, lift, transfer, place and end. At the end the green bag is in the carton.">
+    <p class="figure-caption">One pilot episode from the head camera: start, grasp, lift, transfer, place and end.
+    At the end, the bag is in the carton.</p>
+  </div>
+</section>
+
+<section class="section" id="training">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3">Training</h2>
+    <div class="content">
+      <p>The learning package converts the HDF5 episodes to a dataset and trains an ACT-style policy or a behaviour
+      cloning policy. The validation split uses complete episodes, so no frame of a validation episode is in the
+      training data.</p>
+      <p>A first test trained a small model on the CPU for 300 steps, with 16 training episodes and 4 validation
+      episodes. The validation loss decreased from 0.45 to 0.075. This test shows that the pipeline works. It is not
+      an evaluation of a policy. Full training runs on a cloud GPU.</p>
+    </div>
+    <img class="figure-img narrow" src="static/images/pilot_loss.png" alt="L1 loss against training steps for the pilot dataset. The training and validation losses decrease from approximately 0.5 to 0.1 in 300 steps.">
+    <p class="figure-caption">L1 loss on normalised actions, pilot dataset, CPU, 300 steps.</p>
+  </div>
+</section>
+
+<section class="section alt" id="mobility">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3">Mobility</h2>
+    <div class="content">
+      <p>A mobile version of the scene frees the G2 base and adds two chassis lidars. slam_toolbox makes the map, AMCL
+      finds the robot position, and Nav2 drives the robot.</p>
+    </div>
+    <figure class="clip"><video width="1500" height="540" data-autoplay muted loop playsinline preload="none" poster="static/videos/04_slam_nav.jpg"><source src="static/videos/04_slam_nav.mp4" type="video/mp4"></video><figcaption><span class="clip-title">Mapping and navigation.</span> <span class="clip-sub">slam_toolbox makes the map, then Nav2 drives.</span> The mobile G2 drives a scripted loop around the cell. slam_toolbox makes the map from the two chassis lidars. Then Nav2 drives the robot to a goal on the saved map.<details><summary>Details</summary><ul><li>Part 1: mapping at 4.5 times real time. Part 2: a Nav2 goal at 2.5 times real time.</li><li>Two of two Nav2 goals succeeded. The final errors are 0.10 m and 0.084 m.</li><li>The walls on the map are within 0.1 m of the true wall lines: 99% on three walls, 64% on the wall at the map edge.</li><li>This run used the first cell layout. The map must be made again for the U cell.</li><li>The lidar mounts are estimates. The official G2 model has no lidar positions. The odometry is ground truth.</li></ul></details></figcaption></figure>
+  </div>
+</section>
+
+<section class="section" id="packages">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3">Packages</h2>
+    <div class="content">
+      <p>The repository contains the Docker images, the cell assets and these ROS 2 Jazzy packages. Each package has
+      its own README and tests.</p>
+    </div>
+    <div class="table-container">
+      <table class="table is-fullwidth is-hoverable">
+        <thead><tr><th>Package</th><th>Contents</th></tr></thead>
+        <tbody>
+          <tr><td>g2cell_interfaces</td><td>Messages, services and actions of the cell (PickBag, MoveArm, CellStatus)</td></tr>
+          <tr><td>g2cell_motion</td><td>Motion server: MoveIt IK, head and fixture checks, smooth joint paths, gripper control</td></tr>
+          <tr><td>g2cell_tasks</td><td>PickBag server, arm selection from the reach table, cell manager</td></tr>
+          <tr><td>g2cell_teleop</td><td>Keyboard and SpaceMouse teleoperation</td></tr>
+          <tr><td>g2cell_recorder</td><td>Episode recorder: MCAP bag to HDF5</td></tr>
+          <tr><td>g2cell_datagen</td><td>Scripted episode generator with random bag positions and resets</td></tr>
+          <tr><td>g2cell_learning</td><td>Dataset export, ACT-style and behaviour cloning training, evaluation</td></tr>
+          <tr><td>g2cell_slam</td><td>Mapping and navigation for the mobile G2</td></tr>
+          <tr><td>g2cell_gdk_sim</td><td>Simulated AgiBot GDK interface on Genie Sim</td></tr>
+          <tr><td>g2cell_bringup</td><td>Launch files, parameters, stack check and the object pose relay</td></tr>
+          <tr><td>g2cell_demo</td><td>Packing demo, drive-in, reach check and camera recorder</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section class="section alt" id="status">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3">Status and next steps</h2>
+    <div class="table-container">
+      <table class="table is-fullwidth status-table">
+        <tbody>
+          <tr><td><span class="tag done">done</span></td><td>Genie Sim and Isaac Sim 6.0.1 headless in Docker, on a workstation and on a cloud GPU server</td></tr>
+          <tr><td><span class="tag done">done</span></td><td>U cell with conveyor, cartons, sort rack and end-of-line machines; drive-in and packing demo</td></tr>
+          <tr><td><span class="tag done">done</span></td><td>Object pose relay: moved objects show at their physics positions on camera</td></tr>
+          <tr><td><span class="tag done">done</span></td><td>Keyboard and SpaceMouse teleoperation, episode recorder, scripted episode generator</td></tr>
+          <tr><td><span class="tag done">done</span></td><td>Pilot dataset of 20 episodes, 20 successful; training pipeline tested on the CPU</td></tr>
+          <tr><td><span class="tag done">done</span></td><td>Simulated AgiBot GDK interface: 11 of 11 acceptance tests pass</td></tr>
+          <tr><td><span class="tag part">partial</span></td><td>Reach: 41% of the table spawn area and 1 of 2 rack totes are reachable. Reject bags to the tote need a base turn or a hand-over between arms.</td></tr>
+          <tr><td><span class="tag part">partial</span></td><td>Mapping and navigation work on the first layout. The map must be made again for the U cell.</td></tr>
+          <tr><td><span class="tag todo">next</span></td><td>Moving conveyor with a stop gate, a photo-eye and indexing</td></tr>
+          <tr><td><span class="tag todo">next</span></td><td>Deformable bags with three variants, tuned on a test bench</td></tr>
+          <tr><td><span class="tag todo">next</span></td><td>A larger dataset and policy training on a cloud GPU</td></tr>
+          <tr><td><span class="tag todo">next</span></td><td>Photorealism and domain randomisation, then tests on a real G2. All results on this page come from simulation only.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="credits">
+  <div class="container is-max-desktop content">
+    <h2 class="title is-3">Acknowledgements</h2>
+    <ul>
+      <li>Simulator: <a href="https://github.com/AgibotTech/genie_sim">AgiBot Genie Sim</a> (MPL 2.0) on <a href="https://developer.nvidia.com/isaac/sim">NVIDIA Isaac Sim</a>.</li>
+      <li>Robot model and scene assets: AgiBot G2 model from Genie Sim, and <a href="https://huggingface.co/datasets/agibot-world/GenieSimAssets">GenieSimAssets</a> (AgiBot World community licence, CC BY-NC-SA 4.0, non-commercial use).</li>
+      <li>GDK reference: the AgiBot Genie 02 GDK manual and a community GDK API reference (MIT).</li>
+      <li>Motion planning: <a href="https://moveit.ai/">MoveIt 2</a>. Middleware: ROS 2 Jazzy. Viewer: <a href="https://foxglove.dev/">Foxglove</a>.</li>
+      <li>Navigation: slam_toolbox and <a href="https://nav2.org/">Nav2</a>.</li>
+      <li>Policy design: in the style of ACT (Action Chunking with Transformers) and the LeRobot dataset format.</li>
+      <li>Page layout: in the style of the <a href="https://nerfies.github.io/">Nerfies</a> project page.</li>
+    </ul>
+    <h2 class="title is-3" style="margin-top:2rem">Citation</h2>
+    <pre class="bibtex">@software{bangalorekumaraswamy2026packoffcell,
+  author = {Bangalore Kumaraswamy, Rakshith},
+  title  = {agibot-g2-humanoid-packoff-cell: AgiBot G2 end-of-line packing for flexible, sealed bags},
+  year   = {2026},
+  url    = {https://github.com/Bkrakshith/agibot-g2-humanoid-packoff-cell}
+}</pre>
+  </div>
+</section>
+
+<section class="section alt" id="disclaimer">
+  <div class="container is-max-desktop content">
+    <h2 class="title is-3">Disclaimer</h2>
+    <p>agibot-g2-humanoid-packoff-cell is in development. It is research software. All tests used simulation only. No tests on
+    a real robot and no tests of the transfer from simulation to a real robot are complete.</p>
+    <p>The project is not affiliated with AgiBot or NVIDIA. The names of products and companies on this page
+    identify the software that the project uses. They do not show an endorsement.</p>
+    <p>The software is not for the control of a real robot near people, or on a food production line, without a
+    separate safety analysis, tests and approvals by the user.</p>
+    <p>The author supplies the software, models, data and this page "as is", with no warranty of any kind, express
+    or implied. This includes no warranty of fitness for a purpose, safety, accuracy or non-infringement. Users use
+    the software at their own risk. To the maximum extent that the law permits, the author and the contributors are
+    not liable for any claim, damage, injury, loss or other liability that comes from the software or from its
+    use.</p>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container is-max-desktop has-text-centered">
+    <p>The third-party software and assets have their own licences. Refer to the acknowledgements.</p>
+  </div>
+</footer>
+
+<script>
+  // Play each clip only while it is on screen.
+  const io = new IntersectionObserver(es => es.forEach(e => {
+    const v = e.target;
+    if (e.isIntersecting) { if (v.preload === "none") { v.preload = "auto"; v.load(); } v.play().catch(() => {}); }
+    else v.pause();
+  }), { threshold: 0.25 });
+  document.querySelectorAll("video[data-autoplay]").forEach(v => io.observe(v));
+</script>
+</body>
+</html>

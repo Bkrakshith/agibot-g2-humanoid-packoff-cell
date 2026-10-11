@@ -1,0 +1,77 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 480" font-family="Noto Sans, Helvetica, Arial, sans-serif">
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#5b6472"/>
+    </marker>
+    <style>
+      .box{fill:#ffffff;stroke:#c9d1dc;stroke-width:1.5}
+      .in{fill:#eef5ff;stroke:#7aa7e0}
+      .core{fill:#fff7e8;stroke:#e3a33b;stroke-width:2}
+      .sim{fill:#eefaf2;stroke:#5bb57c}
+      .off{fill:#f4f1fb;stroke:#9a83cf}
+      .t{font-size:17px;font-weight:700;fill:#1f2733}
+      .s{font-size:13px;fill:#4a5462}
+      .l{font-size:12.5px;fill:#5b6472}
+      .grp{font-size:13px;font-weight:700;fill:#8a93a1;letter-spacing:1px}
+      .e{stroke:#5b6472;stroke-width:1.6;fill:none;marker-end:url(#a)}
+      .d{stroke-dasharray:6 5}
+    </style>
+  </defs>
+
+  <text x="20" y="62" class="grp">INPUTS</text>
+  <rect x="20" y="74" width="230" height="66" rx="10" class="box in"/>
+  <text x="34" y="100" class="t">Teleoperation</text><text x="34" y="122" class="s">keyboard (SSH) · SpaceMouse</text>
+  <rect x="20" y="152" width="230" height="66" rx="10" class="box in"/>
+  <text x="34" y="178" class="t">Episode generator</text><text x="34" y="200" class="s">seeded bag, pose, yaw, label</text>
+  <rect x="20" y="230" width="230" height="66" rx="10" class="box in"/>
+  <text x="34" y="256" class="t">Task servers</text><text x="34" y="278" class="s">PickBag · packing demo</text>
+
+  <rect x="330" y="100" width="250" height="196" rx="14" class="box core"/>
+  <text x="350" y="132" class="t">Motion server</text>
+  <text x="350" y="156" class="s">MoveIt /compute_ik, waist first</text>
+  <text x="350" y="176" class="s">0.20 m head-camera clearance</text>
+  <text x="350" y="196" class="s">fixture collision check</text>
+  <text x="350" y="216" class="s">quintic joint paths at 50 Hz</text>
+  <text x="350" y="256" class="l">the only publisher on</text>
+  <text x="350" y="274" class="l">/joint_command</text>
+
+  <text x="660" y="62" class="grp">SIMULATION</text>
+  <rect x="660" y="74" width="250" height="232" rx="14" class="box sim"/>
+  <text x="676" y="104" class="t">Genie Sim RT engine</text>
+  <text x="676" y="128" class="s">Isaac Sim 6.0.1, PhysX 100 Hz</text>
+  <text x="676" y="148" class="s">AgiBot G2: base, waist, 2 × 7-DoF</text>
+  <text x="676" y="168" class="s">arms, grippers, head RGB-D</text>
+  <text x="676" y="200" class="s">object pose relay (25 Hz)</text>
+  <text x="676" y="220" class="s">head camera 640 × 400, 30 Hz</text>
+  <text x="676" y="240" class="s">chassis lidars (mobile scene)</text>
+  <text x="676" y="282" class="l">headless, in Docker</text>
+
+  <text x="980" y="62" class="grp">DATA</text>
+  <rect x="980" y="74" width="200" height="86" rx="12" class="box off"/>
+  <text x="996" y="104" class="t">Recorder</text><text x="996" y="128" class="s">MCAP bag → HDF5</text>
+  <text x="996" y="148" class="l">joints · commands · RGB-D</text>
+  <rect x="980" y="180" width="200" height="86" rx="12" class="box off"/>
+  <text x="996" y="210" class="t">Learning</text><text x="996" y="234" class="s">ACT-style / BC trainer</text>
+  <text x="996" y="254" class="l">split by episode</text>
+  <rect x="980" y="290" width="200" height="76" rx="12" class="box"/>
+  <text x="996" y="320" class="t">Foxglove view</text><text x="996" y="344" class="s">over an SSH tunnel</text>
+
+  <text x="330" y="372" class="grp">SHARED SOURCE</text>
+  <rect x="330" y="384" width="250" height="76" rx="12" class="box"/>
+  <text x="346" y="412" class="t">Cell generator</text><text x="346" y="436" class="s">scene → engine, colliders → planner</text>
+
+  <rect x="660" y="384" width="250" height="76" rx="12" class="box sim d"/>
+  <text x="676" y="414" class="t">Real G2 (later)</text><text x="676" y="438" class="s">same GDK interface names</text>
+
+  <path class="e" d="M250,107 L330,160"/>
+  <path class="e" d="M250,185 L330,198"/>
+  <path class="e" d="M250,263 L330,236"/>
+  <path class="e" d="M580,190 L660,190"/>
+  <text x="596" y="180" class="l">joints</text>
+  <path class="e" d="M910,117 L980,117"/>
+  <path class="e" d="M1080,160 L1080,180"/>
+  <path class="e" d="M910,270 Q950,280 980,320"/>
+  <path class="e" d="M455,384 L455,296"/>
+  <path class="e" d="M580,422 L630,422 L630,260 L660,260"/>
+  <path d="M785,306 L785,384" stroke="#5bb57c" stroke-width="1.6" stroke-dasharray="6 5"/>
+</svg>
