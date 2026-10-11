@@ -1,0 +1,11 @@
+# Drop bags onto the pick table (Stage 5 infeed top-up). Until Stage 5 lands: STATUS_NOT_IMPLEMENTED.
+uint16 count                     # 0 = scene controller default (spec: 5-10 on top-up, 8-20 at start)
+int64 seed                       # < 0 = unseeded
+---
+uint8 STATUS_OK=0
+uint8 STATUS_NOT_IMPLEMENTED=1
+uint8 STATUS_REJECTED=2
+bool success
+uint8 status
+string message
+g2cell_interfaces/BagInfo[] bags

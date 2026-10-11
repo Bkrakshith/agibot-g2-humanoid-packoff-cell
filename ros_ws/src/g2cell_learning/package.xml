@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<package format="3">
+  <name>g2cell_learning</name>
+  <version>0.1.0</version>
+  <description>Imitation learning for the G2 cell: episode HDF5 to torch dataset / LeRobot v2 folder, ACT-lite and BC-MLP training, offline evaluation. Plain Python; ROS is not required.</description>
+  <maintainer email="bangrak2000@gmail.com">Rakshith</maintainer>
+  <license>Apache-2.0</license>
+  <exec_depend>python3-numpy</exec_depend>
+  <exec_depend>python3-h5py</exec_depend>
+  <!-- torch, torchvision, pyarrow, av, matplotlib: pip (see README, .venv-learn) -->
+  <test_depend>python3-pytest</test_depend>
+  <export><build_type>ament_python</build_type></export>
+</package>

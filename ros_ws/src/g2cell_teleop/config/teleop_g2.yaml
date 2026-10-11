@@ -1,0 +1,77 @@
+# Parameters for the G2 teleop node (keyboard_teleop). Every key here is declared by the node
+# (g2cell_teleop/params.py); test/test_config.py keeps the two in sync, types included:
+# write floats as 0.0, not 0, or rclpy rejects the override.
+/**:
+  ros__parameters:
+    # ---- robot / MoveIt ----
+    base_frame: base_link
+    left_group: simple_arm_l
+    right_group: simple_arm_r
+    left_ik_link: arm_l_end_link
+    right_ik_link: arm_r_end_link
+    left_joint_match: arm_l_joint      # substring that picks each arm's joints from /joint_states
+    right_joint_match: arm_r_joint
+    ik_timeout: 0.05                   # s per /compute_ik call
+    rate_hz: 50.0                      # /joint_command and device poll rate
+
+    # ---- grippers (omnipicker leader joints: 0 = closed, -0.785 = open) ----
+    left_gripper_joint: idx31_gripper_l_inner_joint1
+    right_gripper_joint: idx71_gripper_r_inner_joint1
+    gripper_lower: -0.785
+    gripper_upper: 0.0
+    gripper_closed_is_lower: false
+
+    # ---- home pose (key 0): joints 1..7, degrees; default = scene init pose ----
+    home_left_deg: [0.0, -45.0, 0.0, -75.0, 0.0, -55.0, 0.0]    # idx21..idx27_arm_l_joint1..7
+    home_right_deg: [0.0, -45.0, 0.0, -75.0, 0.0, -55.0, 0.0]   # idx61..idx67_arm_r_joint1..7
+    home_joint_speed: 0.5              # rad/s per joint while homing
+
+    # ---- waist yaw (idx05_body_joint5): keys , / . step it, t toggles auto-face ----
+    # The yaw is held across arm moves; ',' / '.' carry both arms with the torso (targets re-seeded by
+    # FK), auto-face keeps the target and turns the waist toward it (g2cell_motion waist_policy).
+    waist_joint: idx05_body_joint5
+    waist_step_deg: 5.0
+    waist_min_deg: -100.0              # joint limit is +-174.5 deg; keep well inside it
+    waist_max_deg: 100.0
+    waist_speed: 0.5                   # rad/s ramp of the commanded waist
+    home_resets_waist: true            # key 0 also turns the waist back to 0
+    auto_face: false                   # start with auto-face on
+    auto_face_cone_deg: 30.0           # target bearing allowed relative to the torso
+    auto_face_pivot: [0.258, 0.0]      # waist axis at arm-base height, base_frame xy
+
+    # ---- end-effector workspace boxes, base_frame, metres [x, y, z] ----
+    # Initial guesses: check them against the measured EE poses in the sim before trusting them.
+    # A target that starts outside a box is never pulled in; it just cannot move further out.
+    use_workspace: true
+    workspace_left_min: [0.15, -0.25, 0.5]
+    workspace_left_max: [0.95, 0.75, 1.7]
+    workspace_right_min: [0.15, -0.75, 0.5]
+    workspace_right_max: [0.95, 0.25, 1.7]
+
+    # ---- continuous-device (SpaceMouse) motion limits ----
+    max_lin_speed: 0.1                 # m/s
+    max_ang_speed: 0.5                 # rad/s
+    max_lin_acc: 0.5                   # m/s^2
+    max_ang_acc: 2.5                   # rad/s^2
+    lin_deadband: 0.0                  # m/s, after scaling
+    ang_deadband: 0.0                  # rad/s, after scaling
+
+    # ---- input device ----
+    device: keyboard                   # keyboard | spacemouse (the keyboard always works too)
+    spacemouse_source: topic           # topic: /spacenav/* from ros-jazzy-spacenav; pyspacemouse: direct USB
+    spacemouse_twist_topic: /spacenav/twist
+    spacemouse_joy_topic: /spacenav/joy
+    spacemouse_lin_scale: 0.1          # m/s at full deflection
+    spacemouse_ang_scale: 0.5          # rad/s at full deflection
+    spacemouse_deadband: 0.1           # fraction of full deflection, per axis
+    spacemouse_axis_map: [0, 1, 2, 3, 4, 5]   # base vx,vy,vz,wx,wy,wz <- raw axis index
+    spacemouse_axis_sign: [1, 1, 1, 1, 1, 1]
+    spacemouse_gripper_button: 0       # toggles the active gripper
+    spacemouse_switch_button: 1        # switches the active arm
+    spacemouse_stale_after: 0.5        # s without /spacenav/twist -> stop
+
+    # ---- recording (key r) ----
+    recording_enabled: true
+    scene: "scene_g2cell"
+    seed: 0
+    episodes_dir: /g2cell_output/episodes

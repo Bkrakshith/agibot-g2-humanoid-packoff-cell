@@ -1,0 +1,21 @@
+# Named arm poses for g2cell_motion motion_server (MoveArm goal.named_pose).
+# joints_deg: arm joints 1..7 in degrees. tool.xyz: fingertip point in the cell frame (origin =
+# G2 base on the floor, +X to the conveyor, +Y robot's left); without yaw_deg the planner searches
+# gripper-down orientations. Reachability: assets/cell/README.md (right arm cannot reach the table).
+named_poses:
+  home:                      # scene_g2cell.yaml init_joint_pos (arm part); waist back to straight ahead
+    joints_deg: [0, -45, 0, -75, 0, -55, 0]
+    waist_deg: 0
+  clear:                     # PickBag goes here first (waist held) when it starts from home: home keeps the hand only
+    left:                    # ~0.10 m over the pack carton and the waist-turning approach swept the gripper through
+      tool: {xyz: [0.50, 0.25, 1.30]}   # the carton's +Y wall (datagen 2026-10-11). Gripper-down, 0.23 m over
+                             # the rim at the carton's near (-X/+Y) corner, so the approach starts high and
+                             # already oriented (a joint-space "elbow up" variant left 93 twisted IK solutions)
+  above_crate:               # 0.10 m over the pack-crate rim (0.82 + 0.224), both arms reach it
+    tool: {xyz: [0.60, 0.0, 1.144], yaw_deg: 0, tilt_deg: 0}
+  above_table:               # over the reachable (inner) half of the pick-table spawn zone
+    left:
+      tool: {xyz: [0.0, 0.60, 1.10]}
+  pre_crate_left:            # left arm, between table and crate (via point used by pick/place)
+    left:
+      tool: {xyz: [0.30, 0.30, 1.16]}

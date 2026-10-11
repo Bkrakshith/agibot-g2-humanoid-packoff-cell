@@ -1,0 +1,701 @@
+#usda 1.0
+(
+    defaultPrim = "SortRack"
+    kilogramsPerUnit = 1
+    metersPerUnit = 1
+    upAxis = "Z"
+)
+
+def Xform "SortRack"
+{
+    def Scope "Looks"
+    {
+        def Material "AnodisedAluminium"
+        {
+            token outputs:surface.connect = </SortRack/Looks/AnodisedAluminium/PreviewSurface.outputs:surface>
+
+            def Shader "PreviewSurface"
+            {
+                uniform token info:id = "UsdPreviewSurface"
+                color3f inputs:diffuseColor = (0.8, 0.81, 0.83)
+                float inputs:metallic = 0.9
+                float inputs:roughness = 0.45
+                token outputs:surface
+            }
+        }
+
+        def Material "ZincRoller"
+        {
+            token outputs:surface.connect = </SortRack/Looks/ZincRoller/PreviewSurface.outputs:surface>
+
+            def Shader "PreviewSurface"
+            {
+                uniform token info:id = "UsdPreviewSurface"
+                color3f inputs:diffuseColor = (0.62, 0.64, 0.66)
+                float inputs:metallic = 1
+                float inputs:roughness = 0.3
+                token outputs:surface
+            }
+        }
+
+        def Material "ZincSteel"
+        {
+            token outputs:surface.connect = </SortRack/Looks/ZincSteel/PreviewSurface.outputs:surface>
+
+            def Shader "PreviewSurface"
+            {
+                uniform token info:id = "UsdPreviewSurface"
+                color3f inputs:diffuseColor = (0.55, 0.56, 0.58)
+                float inputs:metallic = 1
+                float inputs:roughness = 0.4
+                token outputs:surface
+            }
+        }
+    }
+
+    def Xform "Frame"
+    {
+        def Cube "UprightFront1" (
+            prepend apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            rel material:binding = </SortRack/Looks/AnodisedAluminium>
+            color3f[] primvars:displayColor = [(0.8, 0.81, 0.83)]
+            double size = 1
+            float3 xformOp:scale = (0.04, 0.04, 1.5300108)
+            double3 xformOp:translate = (0.305, -0.255, 0.7650054125857995)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
+        }
+
+        def Cube "UprightFront2" (
+            prepend apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            rel material:binding = </SortRack/Looks/AnodisedAluminium>
+            color3f[] primvars:displayColor = [(0.8, 0.81, 0.83)]
+            double size = 1
+            float3 xformOp:scale = (0.04, 0.04, 1.5300108)
+            double3 xformOp:translate = (0.305, 0.255, 0.7650054125857995)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
+        }
+
+        def Cube "UprightRear1" (
+            prepend apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            rel material:binding = </SortRack/Looks/AnodisedAluminium>
+            color3f[] primvars:displayColor = [(0.8, 0.81, 0.83)]
+            double size = 1
+            float3 xformOp:scale = (0.04, 0.04, 1.5300108)
+            double3 xformOp:translate = (-0.305, -0.255, 0.7650054125857995)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
+        }
+
+        def Cube "UprightRear2" (
+            prepend apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            rel material:binding = </SortRack/Looks/AnodisedAluminium>
+            color3f[] primvars:displayColor = [(0.8, 0.81, 0.83)]
+            double size = 1
+            float3 xformOp:scale = (0.04, 0.04, 1.5300108)
+            double3 xformOp:translate = (-0.305, 0.255, 0.7650054125857995)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
+        }
+
+        def Cube "BaseRailFront" (
+            prepend apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            rel material:binding = </SortRack/Looks/AnodisedAluminium>
+            color3f[] primvars:displayColor = [(0.8, 0.81, 0.83)]
+            double size = 1
+            float3 xformOp:scale = (0.04, 0.47, 0.04)
+            double3 xformOp:translate = (0.305, 0, 0.06)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
+        }
+
+        def Cube "TopRailFront" (
+            prepend apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            rel material:binding = </SortRack/Looks/AnodisedAluminium>
+            color3f[] primvars:displayColor = [(0.8, 0.81, 0.83)]
+            double size = 1
+            float3 xformOp:scale = (0.04, 0.47, 0.04)
+            double3 xformOp:translate = (0.305, 0, 1.510010825171599)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
+        }
+
+        def Cube "BaseRailRear" (
+            prepend apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            rel material:binding = </SortRack/Looks/AnodisedAluminium>
+            color3f[] primvars:displayColor = [(0.8, 0.81, 0.83)]
+            double size = 1
+            float3 xformOp:scale = (0.04, 0.47, 0.04)
+            double3 xformOp:translate = (-0.305, 0, 0.06)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
+        }
+
+        def Cube "TopRailRear" (
+            prepend apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            rel material:binding = </SortRack/Looks/AnodisedAluminium>
+            color3f[] primvars:displayColor = [(0.8, 0.81, 0.83)]
+            double size = 1
+            float3 xformOp:scale = (0.04, 0.47, 0.04)
+            double3 xformOp:translate = (-0.305, 0, 1.510010825171599)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
+        }
+
+        def Cube "BaseTie1" (
+            prepend apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            rel material:binding = </SortRack/Looks/AnodisedAluminium>
+            color3f[] primvars:displayColor = [(0.8, 0.81, 0.83)]
+            double size = 1
+            float3 xformOp:scale = (0.57, 0.04, 0.04)
+            double3 xformOp:translate = (0, -0.255, 0.06)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
+        }
+
+        def Cube "BaseTie2" (
+            prepend apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            rel material:binding = </SortRack/Looks/AnodisedAluminium>
+            color3f[] primvars:displayColor = [(0.8, 0.81, 0.83)]
+            double size = 1
+            float3 xformOp:scale = (0.57, 0.04, 0.04)
+            double3 xformOp:translate = (0, 0.255, 0.06)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
+        }
+    }
+
+    def Xform "Shelves"
+    {
+        def Xform "Level1"
+        {
+            def Cube "DeckCollider"
+            {
+                double size = 1
+                token visibility = "invisible"
+                float xformOp:rotateY = 20
+                float3 xformOp:scale = (0.6140306, 0.47, 0.01)
+                double3 xformOp:translate = (0.0017898992833716594, 0, 0.8103069494818699)
+                uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateY", "xformOp:scale"]
+            }
+
+            def Cube "StopBar" (
+                prepend apiSchemas = ["MaterialBindingAPI"]
+            )
+            {
+                rel material:binding = </SortRack/Looks/ZincSteel>
+                color3f[] primvars:displayColor = [(0.55, 0.56, 0.58)]
+                double size = 1
+                float3 xformOp:scale = (0.03, 0.47, 0.07)
+                double3 xformOp:translate = (0.30700000000000005, 0, 0.715)
+                uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
+            }
+
+            def Cube "Beam1" (
+                prepend apiSchemas = ["MaterialBindingAPI"]
+            )
+            {
+                rel material:binding = </SortRack/Looks/AnodisedAluminium>
+                color3f[] primvars:displayColor = [(0.8, 0.81, 0.83)]
+                double size = 1
+                float xformOp:rotateY = 20
+                float3 xformOp:scale = (0.6140306, 0.04, 0.04)
+                double3 xformOp:translate = (-0.01531110788291178, -0.255, 0.7633223184425744)
+                uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateY", "xformOp:scale"]
+            }
+
+            def Cube "Beam2" (
+                prepend apiSchemas = ["MaterialBindingAPI"]
+            )
+            {
+                rel material:binding = </SortRack/Looks/AnodisedAluminium>
+                color3f[] primvars:displayColor = [(0.8, 0.81, 0.83)]
+                double size = 1
+                float xformOp:rotateY = 20
+                float3 xformOp:scale = (0.6140306, 0.04, 0.04)
+                double3 xformOp:translate = (-0.01531110788291178, 0.255, 0.7633223184425744)
+                uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateY", "xformOp:scale"]
+            }
+
+            def Xform "Lane1Rollers"
+            {
+                float xformOp:rotateY = 20
+                double3 xformOp:translate = (0.29200000000000004, 0, 0.71)
+                uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateY"]
+
+                def Cylinder "Roller00" (
+                    prepend apiSchemas = ["MaterialBindingAPI"]
+                )
+                {
+                    uniform token axis = "Y"
+                    float3[] extent = [(-0.015, -0.221, -0.015), (0.015, 0.221, 0.015)]
+                    double height = 0.442
+                    rel material:binding = </SortRack/Looks/ZincRoller>
+                    color3f[] primvars:displayColor = [(0.62, 0.64, 0.66)]
+                    double radius = 0.015
+                    double3 xformOp:translate = (-0.025, 0, -0.015)
+                    uniform token[] xformOpOrder = ["xformOp:translate"]
+                }
+
+                def Cylinder "Roller01" (
+                    prepend apiSchemas = ["MaterialBindingAPI"]
+                )
+                {
+                    uniform token axis = "Y"
+                    float3[] extent = [(-0.015, -0.221, -0.015), (0.015, 0.221, 0.015)]
+                    double height = 0.442
+                    rel material:binding = </SortRack/Looks/ZincRoller>
+                    color3f[] primvars:displayColor = [(0.62, 0.64, 0.66)]
+                    double radius = 0.015
+                    double3 xformOp:translate = (-0.07500000000000001, 0, -0.015)
+                    uniform token[] xformOpOrder = ["xformOp:translate"]
+                }
+
+                def Cylinder "Roller02" (
+                    prepend apiSchemas = ["MaterialBindingAPI"]
+                )
+                {
+                    uniform token axis = "Y"
+                    float3[] extent = [(-0.015, -0.221, -0.015), (0.015, 0.221, 0.015)]
+                    double height = 0.442
+                    rel material:binding = </SortRack/Looks/ZincRoller>
+                    color3f[] primvars:displayColor = [(0.62, 0.64, 0.66)]
+                    double radius = 0.015
+                    double3 xformOp:translate = (-0.125, 0, -0.015)
+                    uniform token[] xformOpOrder = ["xformOp:translate"]
+                }
+
+                def Cylinder "Roller03" (
+                    prepend apiSchemas = ["MaterialBindingAPI"]
+                )
+                {
+                    uniform token axis = "Y"
+                    float3[] extent = [(-0.015, -0.221, -0.015), (0.015, 0.221, 0.015)]
+                    double height = 0.442
+                    rel material:binding = </SortRack/Looks/ZincRoller>
+                    color3f[] primvars:displayColor = [(0.62, 0.64, 0.66)]
+                    double radius = 0.015
+                    double3 xformOp:translate = (-0.17500000000000002, 0, -0.015)
+                    uniform token[] xformOpOrder = ["xformOp:translate"]
+                }
+
+                def Cylinder "Roller04" (
+                    prepend apiSchemas = ["MaterialBindingAPI"]
+                )
+                {
+                    uniform token axis = "Y"
+                    float3[] extent = [(-0.015, -0.221, -0.015), (0.015, 0.221, 0.015)]
+                    double height = 0.442
+                    rel material:binding = </SortRack/Looks/ZincRoller>
+                    color3f[] primvars:displayColor = [(0.62, 0.64, 0.66)]
+                    double radius = 0.015
+                    double3 xformOp:translate = (-0.225, 0, -0.015)
+                    uniform token[] xformOpOrder = ["xformOp:translate"]
+                }
+
+                def Cylinder "Roller05" (
+                    prepend apiSchemas = ["MaterialBindingAPI"]
+                )
+                {
+                    uniform token axis = "Y"
+                    float3[] extent = [(-0.015, -0.221, -0.015), (0.015, 0.221, 0.015)]
+                    double height = 0.442
+                    rel material:binding = </SortRack/Looks/ZincRoller>
+                    color3f[] primvars:displayColor = [(0.62, 0.64, 0.66)]
+                    double radius = 0.015
+                    double3 xformOp:translate = (-0.275, 0, -0.015)
+                    uniform token[] xformOpOrder = ["xformOp:translate"]
+                }
+
+                def Cylinder "Roller06" (
+                    prepend apiSchemas = ["MaterialBindingAPI"]
+                )
+                {
+                    uniform token axis = "Y"
+                    float3[] extent = [(-0.015, -0.221, -0.015), (0.015, 0.221, 0.015)]
+                    double height = 0.442
+                    rel material:binding = </SortRack/Looks/ZincRoller>
+                    color3f[] primvars:displayColor = [(0.62, 0.64, 0.66)]
+                    double radius = 0.015
+                    double3 xformOp:translate = (-0.325, 0, -0.015)
+                    uniform token[] xformOpOrder = ["xformOp:translate"]
+                }
+
+                def Cylinder "Roller07" (
+                    prepend apiSchemas = ["MaterialBindingAPI"]
+                )
+                {
+                    uniform token axis = "Y"
+                    float3[] extent = [(-0.015, -0.221, -0.015), (0.015, 0.221, 0.015)]
+                    double height = 0.442
+                    rel material:binding = </SortRack/Looks/ZincRoller>
+                    color3f[] primvars:displayColor = [(0.62, 0.64, 0.66)]
+                    double radius = 0.015
+                    double3 xformOp:translate = (-0.375, 0, -0.015)
+                    uniform token[] xformOpOrder = ["xformOp:translate"]
+                }
+
+                def Cylinder "Roller08" (
+                    prepend apiSchemas = ["MaterialBindingAPI"]
+                )
+                {
+                    uniform token axis = "Y"
+                    float3[] extent = [(-0.015, -0.221, -0.015), (0.015, 0.221, 0.015)]
+                    double height = 0.442
+                    rel material:binding = </SortRack/Looks/ZincRoller>
+                    color3f[] primvars:displayColor = [(0.62, 0.64, 0.66)]
+                    double radius = 0.015
+                    double3 xformOp:translate = (-0.42500000000000004, 0, -0.015)
+                    uniform token[] xformOpOrder = ["xformOp:translate"]
+                }
+
+                def Cylinder "Roller09" (
+                    prepend apiSchemas = ["MaterialBindingAPI"]
+                )
+                {
+                    uniform token axis = "Y"
+                    float3[] extent = [(-0.015, -0.221, -0.015), (0.015, 0.221, 0.015)]
+                    double height = 0.442
+                    rel material:binding = </SortRack/Looks/ZincRoller>
+                    color3f[] primvars:displayColor = [(0.62, 0.64, 0.66)]
+                    double radius = 0.015
+                    double3 xformOp:translate = (-0.47500000000000003, 0, -0.015)
+                    uniform token[] xformOpOrder = ["xformOp:translate"]
+                }
+
+                def Cylinder "Roller10" (
+                    prepend apiSchemas = ["MaterialBindingAPI"]
+                )
+                {
+                    uniform token axis = "Y"
+                    float3[] extent = [(-0.015, -0.221, -0.015), (0.015, 0.221, 0.015)]
+                    double height = 0.442
+                    rel material:binding = </SortRack/Looks/ZincRoller>
+                    color3f[] primvars:displayColor = [(0.62, 0.64, 0.66)]
+                    double radius = 0.015
+                    double3 xformOp:translate = (-0.525, 0, -0.015)
+                    uniform token[] xformOpOrder = ["xformOp:translate"]
+                }
+
+                def Cube "ChannelL" (
+                    prepend apiSchemas = ["MaterialBindingAPI"]
+                )
+                {
+                    rel material:binding = </SortRack/Looks/ZincSteel>
+                    color3f[] primvars:displayColor = [(0.55, 0.56, 0.58)]
+                    double size = 1
+                    float3 xformOp:scale = (0.6140306, 0.012, 0.035)
+                    double3 xformOp:translate = (-0.30701528735930067, -0.229, -0.0125)
+                    uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
+                }
+
+                def Cube "ChannelR" (
+                    prepend apiSchemas = ["MaterialBindingAPI"]
+                )
+                {
+                    rel material:binding = </SortRack/Looks/ZincSteel>
+                    color3f[] primvars:displayColor = [(0.55, 0.56, 0.58)]
+                    double size = 1
+                    float3 xformOp:scale = (0.6140306, 0.012, 0.035)
+                    double3 xformOp:translate = (-0.30701528735930067, 0.229, -0.0125)
+                    uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
+                }
+            }
+        }
+
+        def Xform "Level2"
+        {
+            def Cube "DeckCollider"
+            {
+                double size = 1
+                token visibility = "invisible"
+                float xformOp:rotateY = 20
+                float3 xformOp:scale = (0.6140306, 0.47, 0.01)
+                double3 xformOp:translate = (0.0017898992833716594, 0, 1.3603069494818698)
+                uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateY", "xformOp:scale"]
+            }
+
+            def Cube "StopBar" (
+                prepend apiSchemas = ["MaterialBindingAPI"]
+            )
+            {
+                rel material:binding = </SortRack/Looks/ZincSteel>
+                color3f[] primvars:displayColor = [(0.55, 0.56, 0.58)]
+                double size = 1
+                float3 xformOp:scale = (0.03, 0.47, 0.07)
+                double3 xformOp:translate = (0.30700000000000005, 0, 1.2650000000000001)
+                uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
+            }
+
+            def Cube "Beam1" (
+                prepend apiSchemas = ["MaterialBindingAPI"]
+            )
+            {
+                rel material:binding = </SortRack/Looks/AnodisedAluminium>
+                color3f[] primvars:displayColor = [(0.8, 0.81, 0.83)]
+                double size = 1
+                float xformOp:rotateY = 20
+                float3 xformOp:scale = (0.6140306, 0.04, 0.04)
+                double3 xformOp:translate = (-0.01531110788291178, -0.255, 1.3133223184425744)
+                uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateY", "xformOp:scale"]
+            }
+
+            def Cube "Beam2" (
+                prepend apiSchemas = ["MaterialBindingAPI"]
+            )
+            {
+                rel material:binding = </SortRack/Looks/AnodisedAluminium>
+                color3f[] primvars:displayColor = [(0.8, 0.81, 0.83)]
+                double size = 1
+                float xformOp:rotateY = 20
+                float3 xformOp:scale = (0.6140306, 0.04, 0.04)
+                double3 xformOp:translate = (-0.01531110788291178, 0.255, 1.3133223184425744)
+                uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateY", "xformOp:scale"]
+            }
+
+            def Xform "Lane1Rollers"
+            {
+                float xformOp:rotateY = 20
+                double3 xformOp:translate = (0.29200000000000004, 0, 1.26)
+                uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateY"]
+
+                def Cylinder "Roller00" (
+                    prepend apiSchemas = ["MaterialBindingAPI"]
+                )
+                {
+                    uniform token axis = "Y"
+                    float3[] extent = [(-0.015, -0.221, -0.015), (0.015, 0.221, 0.015)]
+                    double height = 0.442
+                    rel material:binding = </SortRack/Looks/ZincRoller>
+                    color3f[] primvars:displayColor = [(0.62, 0.64, 0.66)]
+                    double radius = 0.015
+                    double3 xformOp:translate = (-0.025, 0, -0.015)
+                    uniform token[] xformOpOrder = ["xformOp:translate"]
+                }
+
+                def Cylinder "Roller01" (
+                    prepend apiSchemas = ["MaterialBindingAPI"]
+                )
+                {
+                    uniform token axis = "Y"
+                    float3[] extent = [(-0.015, -0.221, -0.015), (0.015, 0.221, 0.015)]
+                    double height = 0.442
+                    rel material:binding = </SortRack/Looks/ZincRoller>
+                    color3f[] primvars:displayColor = [(0.62, 0.64, 0.66)]
+                    double radius = 0.015
+                    double3 xformOp:translate = (-0.07500000000000001, 0, -0.015)
+                    uniform token[] xformOpOrder = ["xformOp:translate"]
+                }
+
+                def Cylinder "Roller02" (
+                    prepend apiSchemas = ["MaterialBindingAPI"]
+                )
+                {
+                    uniform token axis = "Y"
+                    float3[] extent = [(-0.015, -0.221, -0.015), (0.015, 0.221, 0.015)]
+                    double height = 0.442
+                    rel material:binding = </SortRack/Looks/ZincRoller>
+                    color3f[] primvars:displayColor = [(0.62, 0.64, 0.66)]
+                    double radius = 0.015
+                    double3 xformOp:translate = (-0.125, 0, -0.015)
+                    uniform token[] xformOpOrder = ["xformOp:translate"]
+                }
+
+                def Cylinder "Roller03" (
+                    prepend apiSchemas = ["MaterialBindingAPI"]
+                )
+                {
+                    uniform token axis = "Y"
+                    float3[] extent = [(-0.015, -0.221, -0.015), (0.015, 0.221, 0.015)]
+                    double height = 0.442
+                    rel material:binding = </SortRack/Looks/ZincRoller>
+                    color3f[] primvars:displayColor = [(0.62, 0.64, 0.66)]
+                    double radius = 0.015
+                    double3 xformOp:translate = (-0.17500000000000002, 0, -0.015)
+                    uniform token[] xformOpOrder = ["xformOp:translate"]
+                }
+
+                def Cylinder "Roller04" (
+                    prepend apiSchemas = ["MaterialBindingAPI"]
+                )
+                {
+                    uniform token axis = "Y"
+                    float3[] extent = [(-0.015, -0.221, -0.015), (0.015, 0.221, 0.015)]
+                    double height = 0.442
+                    rel material:binding = </SortRack/Looks/ZincRoller>
+                    color3f[] primvars:displayColor = [(0.62, 0.64, 0.66)]
+                    double radius = 0.015
+                    double3 xformOp:translate = (-0.225, 0, -0.015)
+                    uniform token[] xformOpOrder = ["xformOp:translate"]
+                }
+
+                def Cylinder "Roller05" (
+                    prepend apiSchemas = ["MaterialBindingAPI"]
+                )
+                {
+                    uniform token axis = "Y"
+                    float3[] extent = [(-0.015, -0.221, -0.015), (0.015, 0.221, 0.015)]
+                    double height = 0.442
+                    rel material:binding = </SortRack/Looks/ZincRoller>
+                    color3f[] primvars:displayColor = [(0.62, 0.64, 0.66)]
+                    double radius = 0.015
+                    double3 xformOp:translate = (-0.275, 0, -0.015)
+                    uniform token[] xformOpOrder = ["xformOp:translate"]
+                }
+
+                def Cylinder "Roller06" (
+                    prepend apiSchemas = ["MaterialBindingAPI"]
+                )
+                {
+                    uniform token axis = "Y"
+                    float3[] extent = [(-0.015, -0.221, -0.015), (0.015, 0.221, 0.015)]
+                    double height = 0.442
+                    rel material:binding = </SortRack/Looks/ZincRoller>
+                    color3f[] primvars:displayColor = [(0.62, 0.64, 0.66)]
+                    double radius = 0.015
+                    double3 xformOp:translate = (-0.325, 0, -0.015)
+                    uniform token[] xformOpOrder = ["xformOp:translate"]
+                }
+
+                def Cylinder "Roller07" (
+                    prepend apiSchemas = ["MaterialBindingAPI"]
+                )
+                {
+                    uniform token axis = "Y"
+                    float3[] extent = [(-0.015, -0.221, -0.015), (0.015, 0.221, 0.015)]
+                    double height = 0.442
+                    rel material:binding = </SortRack/Looks/ZincRoller>
+                    color3f[] primvars:displayColor = [(0.62, 0.64, 0.66)]
+                    double radius = 0.015
+                    double3 xformOp:translate = (-0.375, 0, -0.015)
+                    uniform token[] xformOpOrder = ["xformOp:translate"]
+                }
+
+                def Cylinder "Roller08" (
+                    prepend apiSchemas = ["MaterialBindingAPI"]
+                )
+                {
+                    uniform token axis = "Y"
+                    float3[] extent = [(-0.015, -0.221, -0.015), (0.015, 0.221, 0.015)]
+                    double height = 0.442
+                    rel material:binding = </SortRack/Looks/ZincRoller>
+                    color3f[] primvars:displayColor = [(0.62, 0.64, 0.66)]
+                    double radius = 0.015
+                    double3 xformOp:translate = (-0.42500000000000004, 0, -0.015)
+                    uniform token[] xformOpOrder = ["xformOp:translate"]
+                }
+
+                def Cylinder "Roller09" (
+                    prepend apiSchemas = ["MaterialBindingAPI"]
+                )
+                {
+                    uniform token axis = "Y"
+                    float3[] extent = [(-0.015, -0.221, -0.015), (0.015, 0.221, 0.015)]
+                    double height = 0.442
+                    rel material:binding = </SortRack/Looks/ZincRoller>
+                    color3f[] primvars:displayColor = [(0.62, 0.64, 0.66)]
+                    double radius = 0.015
+                    double3 xformOp:translate = (-0.47500000000000003, 0, -0.015)
+                    uniform token[] xformOpOrder = ["xformOp:translate"]
+                }
+
+                def Cylinder "Roller10" (
+                    prepend apiSchemas = ["MaterialBindingAPI"]
+                )
+                {
+                    uniform token axis = "Y"
+                    float3[] extent = [(-0.015, -0.221, -0.015), (0.015, 0.221, 0.015)]
+                    double height = 0.442
+                    rel material:binding = </SortRack/Looks/ZincRoller>
+                    color3f[] primvars:displayColor = [(0.62, 0.64, 0.66)]
+                    double radius = 0.015
+                    double3 xformOp:translate = (-0.525, 0, -0.015)
+                    uniform token[] xformOpOrder = ["xformOp:translate"]
+                }
+
+                def Cube "ChannelL" (
+                    prepend apiSchemas = ["MaterialBindingAPI"]
+                )
+                {
+                    rel material:binding = </SortRack/Looks/ZincSteel>
+                    color3f[] primvars:displayColor = [(0.55, 0.56, 0.58)]
+                    double size = 1
+                    float3 xformOp:scale = (0.6140306, 0.012, 0.035)
+                    double3 xformOp:translate = (-0.30701528735930067, -0.229, -0.0125)
+                    uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
+                }
+
+                def Cube "ChannelR" (
+                    prepend apiSchemas = ["MaterialBindingAPI"]
+                )
+                {
+                    rel material:binding = </SortRack/Looks/ZincSteel>
+                    color3f[] primvars:displayColor = [(0.55, 0.56, 0.58)]
+                    double size = 1
+                    float3 xformOp:scale = (0.6140306, 0.012, 0.035)
+                    double3 xformOp:translate = (-0.30701528735930067, 0.229, -0.0125)
+                    uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
+                }
+            }
+        }
+    }
+
+    def Xform "Lanes"
+    {
+        def Xform "L1_1"
+        {
+            def Cube "Label"
+            {
+                color3f[] primvars:displayColor = [(0.85, 0.15, 0.15)]
+                double size = 1
+                float3 xformOp:scale = (0.003, 0.12, 0.045)
+                double3 xformOp:translate = (0.3235, 0, 0.715)
+                uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
+            }
+
+            def Xform "ToteSlot" (
+                doc = "Tote volume centre. Local +X = down-slope toward the robot (600 mm side), +Y = across lane (400 mm), +Z = deck normal (325 mm, open top tilted toward the robot)."
+            )
+            {
+                custom float3 packoff:toteSize = (0.6, 0.4, 0.325)
+                float xformOp:rotateY = 20
+                double3 xformOp:translate = (0.0656704870546487, 0, 0.9653060938754107)
+                uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateY"]
+            }
+        }
+
+        def Xform "L2_1"
+        {
+            def Cube "Label"
+            {
+                color3f[] primvars:displayColor = [(0.15, 0.35, 0.85)]
+                double size = 1
+                float3 xformOp:scale = (0.003, 0.12, 0.045)
+                double3 xformOp:translate = (0.3235, 0, 1.2650000000000001)
+                uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
+            }
+
+            def Xform "ToteSlot" (
+                doc = "Tote volume centre. Local +X = down-slope toward the robot (600 mm side), +Y = across lane (400 mm), +Z = deck normal (325 mm, open top tilted toward the robot)."
+            )
+            {
+                custom float3 packoff:toteSize = (0.6, 0.4, 0.325)
+                float xformOp:rotateY = 20
+                double3 xformOp:translate = (0.0656704870546487, 0, 1.5153060938754108)
+                uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateY"]
+            }
+        }
+    }
+}
+

@@ -1,0 +1,51 @@
+# Move one G2 arm and/or its gripper (g2cell_motion motion_server, action /g2cell/move_arm).
+# Cartesian targets go through MoveIt /compute_ik, paths are checked against the head (0.20 m),
+# and the joints follow quintic (minimum-jerk) joint-space interpolation at 50 Hz on /joint_command.
+string LEFT=left
+string RIGHT=right
+string FRAME_CELL_TOOL=cell_tool     # pose = fingertip point in the cell frame (default)
+string FRAME_BASE_END_LINK=base_link # pose = arm_*_end_link in base_link
+uint8 GRIPPER_KEEP=0
+uint8 GRIPPER_OPEN=1
+uint8 GRIPPER_CLOSE=2
+string WAIST_FIRST=waist_first       # turn the waist (idx05_body_joint5) so the target is within the torso cone
+string WAIST_FIXED=fixed             # keep the current waist yaw
+string WAIST_ABSOLUTE=absolute       # turn the waist to waist_yaw
+
+string arm
+string named_pose                # non-empty: go to this named pose (pose/via ignored)
+geometry_msgs/Pose pose          # target (orientation = arm_*_end_link orientation in base_link)
+bool auto_orientation            # true: ignore pose.orientation, search gripper-down orientations
+geometry_msgs/Pose[] via         # optional via points before pose (same orientation as pose)
+geometry_msgs/Pose[] lookahead   # optional points the caller moves to NEXT (same orientation, waist held at the
+                                 # final yaw): planned and head-checked, NOT executed, so the plan never ends
+                                 # where the next move is impossible (e.g. approach -> grasp/lift below it)
+string frame                     # "" = cell_tool
+bool gripper_only                # true: no arm motion, only the gripper command
+uint8 gripper                    # gripper command, applied after the arm motion
+float32 duration                 # s for the arm motion; 0 = from max_joint_vel (never faster)
+float32 max_joint_vel            # rad/s; 0 = server default
+string waist_mode                # WAIST_*; "" = motion_server parameter waist_mode (default waist_first)
+float32 waist_yaw                # rad, only for WAIST_ABSOLUTE
+---
+int8 OK=0
+int8 INVALID_GOAL=1
+int8 IK_FAILED=2
+int8 HEAD_CLEARANCE=3
+int8 BUSY=4
+int8 CANCELED=5
+int8 NO_JOINT_STATES=6
+int8 UNKNOWN_NAMED_POSE=7
+int8 FK_FAILED=8
+int8 error_code
+string message
+float32 head_clearance           # m, min over the executed path (-1 if not checked)
+geometry_msgs/Quaternion orientation_used   # end-link orientation of the final pose; all zero = n/a (joint pose)
+string[] joint_names
+float64[] positions              # commanded arm joints at the end
+float32 waist_yaw                # rad, commanded waist yaw at the end
+bool base_turn_needed            # the target is beyond what the waist can cover (base NOT driven)
+float32 base_turn                # rad, base rotation that would still be needed (+ = left)
+---
+string phase                     # planning | moving | gripper
+float32 progress                 # 0..1 over the arm motion

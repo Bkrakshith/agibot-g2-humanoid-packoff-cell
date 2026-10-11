@@ -1,0 +1,56 @@
+{
+ "_comment": "Public captions for the page, written to ASD-STE100. build.py copies each clip from 'src' (relative to the project root) and makes its poster at 'poster_t' seconds.",
+ "01_packing_overview": {
+  "src": "output/renders/g2cell_packing.mp4",
+  "poster_t": 40.0,
+  "title": "Packing cycle in the U cell",
+  "subtitle": "One continuous take, Isaac Sim 6.0.1 through Genie Sim",
+  "description": "The G2 drives into the U cell. It picks a bag from the table with the left arm and places it over the open carton on the conveyor. Then it moves the right arm to a tote in the sort rack.",
+  "notes": [
+   "The drive-in is 2.0 m in 10.3 s. The final position error is 0.57 cm and 0.00°.",
+   "The waist turns first: +55° to the table, 0° to the carton, -95° to the rack. Then the arm moves.",
+   "The base holds its position on odometry while the arms move. The base drift is 0.43 cm and 0.07°.",
+   "The edit removes the planning time. The clip is 67.8 s at 12 frames per second.",
+   "This take was recorded before the object pose relay. The bag stays at its start position on camera, and the grasp is symbolic. Refer to the pilot dataset below for a take where the bag moves."
+  ]
+ },
+ "02_packing_head": {
+  "src": "output/renders/g2cell_packing_head.mp4",
+  "poster_t": 22.0,
+  "title": "Head camera view",
+  "subtitle": "What the robot sees, 640 × 400",
+  "description": "This is the head camera of the G2 during the same take. The data recorder and the training use this view.",
+  "notes": [
+   "The camera is on the official G2 head mount.",
+   "The arm paths stay a minimum of 0.20 m from the head camera. The arm colliders of the G2 are off in Genie Sim, so the planner does this check."
+  ]
+ },
+ "03_teleop_replay": {
+  "src": "output/viz/teleop_cell_kinematics.mp4",
+  "poster_t": 4.6,
+  "title": "Recorded teleoperation episode",
+  "subtitle": "Kinematic replay from the HDF5 file",
+  "description": "An operator moved the arms with the keyboard. The recorder wrote the joint states, the joint commands and the camera frames. This replay draws the robot again from the recorded data.",
+  "notes": [
+   "Left: the robot model, with the recorded joint positions.",
+   "Centre: the head camera and the free camera frames from the episode.",
+   "Right: the left-arm joints. Grey is measured. Dark blue is the command. The commands and the measured joints agree within 0.0012 rad.",
+   "This episode is from the first, simpler scene with crates and totes.",
+   "There is no policy in this clip. It shows the recorded motion only."
+  ]
+ },
+ "04_slam_nav": {
+  "src": "output/renders/g2_slam_nav.mp4",
+  "poster_t": 9.0,
+  "title": "Mapping and navigation",
+  "subtitle": "slam_toolbox makes the map, then Nav2 drives",
+  "description": "The mobile G2 drives a scripted loop around the cell. slam_toolbox makes the map from the two chassis lidars. Then Nav2 drives the robot to a goal on the saved map.",
+  "notes": [
+   "Part 1: mapping at 4.5 times real time. Part 2: a Nav2 goal at 2.5 times real time.",
+   "Two of two Nav2 goals succeeded. The final errors are 0.10 m and 0.084 m.",
+   "The walls on the map are within 0.1 m of the true wall lines: 99% on three walls, 64% on the wall at the map edge.",
+   "This run used the first cell layout. The map must be made again for the U cell.",
+   "The lidar mounts are estimates. The official G2 model has no lidar positions. The odometry is ground truth."
+  ]
+ }
+}

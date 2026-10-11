@@ -1,0 +1,64 @@
+# g2cell_datagen: per-episode domain randomisation (cell frame: origin = G2 base on the floor,
+# +X conveyor, +Y robot's left). Every value is drawn from random.Random(seed), so an episode is
+# reproducible from its seed alone (spec: "replayable from their seed").
+#
+# Sources:
+#  - table footprint / spawn zone / bag size: assets/cell/build.py LAYOUT + BAG_SIZE,
+#    assets/cell/README.md "Layout v2" (table centre (-0.215, 0.73) turned -90 deg)
+#  - reach: assets/cell/README.md "Reach (Layout v2)": reachable band at table height
+#    X ~ -0.4..+0.35, Y <~ 0.9; MoveIt IK yes at (0.05, 0.62) and (-0.25, 0.62), no at (-0.10, 0.90).
+#    g2cell_tasks config/tasks.yaml reachability.left_table_max_y (0.85) bounds the bag centre.
+table:
+  footprint_x: [-0.715, 0.285]
+  footprint_y: [0.43, 1.03]
+  spawn_zone_x: [-0.665, 0.235]
+  spawn_zone_y: [0.48, 0.98]
+  top_z: 0.87                  # table top; bag prims sit with their bottom here
+reach_band_x: [-0.40, 0.35]    # offline waist-swept envelope at table height
+bag_size_xy: [0.21, 0.30]      # rigid placeholder, X x Y at yaw 0
+
+randomise:
+  # Bag centre region: the reachable part of the spawn zone. Y stays below the MoveIt-verified
+  # limit with margin (0.80 < left_table_max_y 0.85); X inside the reach band.
+  region_x: [-0.25, 0.15]
+  region_y: [0.52, 0.80]
+  # Measured planner reach (tools/perf/reach_sweep.py -> output/perf/reach_sweep_pilot.json, 2026-10-11): PickBag
+  # to the carton completes on a 7 x 5 grid except x = -0.30 and the far corner (x - y < ~-0.88: (-0.225, 0.73),
+  # (-0.15, 0.80), ...). The cut below keeps ~0.03 m margin. pilot_v1 seeds 2/3 failed approach there.
+  min_x_minus_y: -0.85
+  yaw_deg: [-90.0, 90.0]       # spec "random yaw"; the box bag is symmetric under 180 deg
+  bag_ids: [Bag_01, Bag_02, Bag_03]   # which bag prim is moved into the region and picked
+  # good -> pack carton, reject -> rack tote L1_1 (sort rule). reject is OFF for now: the left arm's transfer from
+  # the table to the rack tote failed planning at all 35 sweep points (twist / IK); restore {good: 0.7, reject:
+  # 0.3} once the rack drop is solved (base turn or a handover to the right arm).
+  labels: {good: 1.0}
+  edge_margin: 0.02            # bag corners stay this far inside the table footprint
+  min_gap: 0.03                # clearance between the picked bag and the parked bags
+  max_tries: 500
+  # The bags that are not picked this episode go to parking spots [x, y, yaw_deg, z_bottom] out of
+  # reach (Y > left_table_max_y, so PickBag "any" never takes them). On the floor behind the table
+  # (Y 1.25..1.55; cell_colliders.json has only the floor there), so the whole region stays free.
+  # Spots on the table back strip (e.g. [-0.54, 0.90, 90, 0.87]) also validate but block region Y > ~0.66.
+  park: [[-0.40, 1.40, 0.0, 0.0], [-0.10, 1.40, 0.0, 0.0]]
+  # later (not cheap yet): lighting, camera jitter, table/conveyor offsets, bag graphics/stiffness.
+
+reset:
+  # teleport: (default; needs the sim started with OBJ_RELAY=1, the stage1_up.sh default) the bags are moved
+  #          to the episode's poses and the pack carton back to its spot through /g2cell/object_poke, then the
+  #          relay's /tf_render poses are checked (1 cm / 3 deg). ~2 s. With GRASP_ASSIST=1 (default) the
+  #          grasped bag is carried, and after the task its resting place labels the outcome (score).
+  # none:    no scene change. Only the task's belief (tasks.yaml for pick_bag_server) is randomised;
+  #          the bag prims stay where cell.usda put them (renders show the built poses).
+  # restart: write a USD override layer + scene YAML with the episode's bag poses, restart the sim
+  #          stack (stop_cmd, start_cmd) and wait for /joint_states. ~1 min per episode warm.
+  mode: teleport
+  restore:                     # fixtures put back every episode: path -> [x, y, z, yaw_deg] (cell.usda poses)
+    /World/Cartons/Carton_Pack: [0.60, 0.0, 0.82, 0.0]
+  settle_s: 1.0                # after a teleport, and after the task before the placement is scored
+  score: true                  # label completed motions from the bag's resting place (teleport / restart)
+  base_scene_yaml: /g2cell_ws/config/scenes/scene_g2cell.yaml
+  cell_usda: /geniesim_assets/scenes/g2cell/cell.usda
+  variants_dir: /geniesim_assets/scenes/g2cell/datagen   # <batch>/<episode>.usda + .yaml
+  stop_cmd: "tmux kill-session -t g2cell"
+  start_cmd: "PROFILE={profile} bash /g2cell_ws/scripts/stage1_up.sh {scene_yaml}"
+  ready_timeout_s: 900

@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<package format="3">
+  <name>g2cell_motion</name>
+  <version>0.1.0</version>
+  <description>Reusable G2 arm motion for the pack-off cell: MoveIt /compute_ik waypoint planning over gripper-down orientations, head-clearance check, quintic joint interpolation streamed at 50 Hz on /joint_command, gripper helpers, named poses, single-publisher guard, and the MoveArm action server/client.</description>
+  <maintainer email="bangrak2000@gmail.com">Rakshith</maintainer>
+  <license>Apache-2.0</license>
+  <exec_depend>rclpy</exec_depend>
+  <exec_depend>ament_index_python</exec_depend>
+  <exec_depend>sensor_msgs</exec_depend>
+  <exec_depend>geometry_msgs</exec_depend>
+  <exec_depend>moveit_msgs</exec_depend>
+  <exec_depend>g2cell_interfaces</exec_depend>
+  <exec_depend>python3-yaml</exec_depend>
+  <test_depend>python3-pytest</test_depend>
+  <export><build_type>ament_python</build_type></export>
+</package>

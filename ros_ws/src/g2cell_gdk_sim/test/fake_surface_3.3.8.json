@@ -1,0 +1,401 @@
+{
+ "classes": {
+  "Camera": {
+   "attributes": [
+    "types"
+   ],
+   "methods": {
+    "__init__": [
+     {
+      "default": true,
+      "kind": "positional",
+      "name": "camera_types"
+     }
+    ],
+    "close_camera": [],
+    "get_camera_intrinsic": [
+     {
+      "default": false,
+      "kind": "positional",
+      "name": "camera_type"
+     }
+    ],
+    "get_image_fps": [
+     {
+      "default": false,
+      "kind": "positional",
+      "name": "camera_type"
+     }
+    ],
+    "get_image_shape": [
+     {
+      "default": false,
+      "kind": "positional",
+      "name": "camera_type"
+     }
+    ],
+    "get_latest_image": [
+     {
+      "default": false,
+      "kind": "positional",
+      "name": "camera_type"
+     },
+     {
+      "default": false,
+      "kind": "positional",
+      "name": "timeout_ms"
+     }
+    ]
+   }
+  },
+  "CameraIntrinsic": {
+   "attributes": [
+    "distortion",
+    "intrinsic"
+   ],
+   "methods": {
+    "__init__": [
+     {
+      "default": false,
+      "kind": "positional",
+      "name": "intrinsic"
+     }
+    ]
+   }
+  },
+  "EndEffectorPose": {
+   "attributes": [
+    "group",
+    "left_end_effector_pose",
+    "life_time",
+    "right_end_effector_pose"
+   ],
+   "methods": {
+    "__init__": []
+   }
+  },
+  "JointControlReq": {
+   "attributes": [
+    "detail",
+    "joint_names",
+    "joint_positions",
+    "joint_velocities",
+    "life_time"
+   ],
+   "methods": {
+    "__init__": []
+   }
+  },
+  "JointServoControlReq": {
+   "attributes": [
+    "control_period",
+    "joint_names",
+    "joint_positions",
+    "joint_velocities"
+   ],
+   "methods": {
+    "__init__": []
+   }
+  },
+  "JointState": {
+   "attributes": [
+    "position"
+   ],
+   "methods": {
+    "__init__": []
+   }
+  },
+  "JointStates": {
+   "attributes": [
+    "group",
+    "nums",
+    "states",
+    "target_type"
+   ],
+   "methods": {
+    "__init__": []
+   }
+  },
+  "Pose": {
+   "attributes": [
+    "orientation",
+    "position"
+   ],
+   "methods": {
+    "__init__": []
+   }
+  },
+  "Quaternion": {
+   "attributes": [
+    "w",
+    "x",
+    "y",
+    "z"
+   ],
+   "methods": {
+    "__init__": [
+     {
+      "default": true,
+      "kind": "positional",
+      "name": "x"
+     },
+     {
+      "default": true,
+      "kind": "positional",
+      "name": "y"
+     },
+     {
+      "default": true,
+      "kind": "positional",
+      "name": "z"
+     },
+     {
+      "default": true,
+      "kind": "positional",
+      "name": "w"
+     }
+    ]
+   }
+  },
+  "Robot": {
+   "attributes": [],
+   "methods": {
+    "clear_motion_control_error": [],
+    "end_effector_pose_control": [
+     {
+      "default": false,
+      "kind": "positional",
+      "name": "pose"
+     }
+    ],
+    "get_chassis_power_state": [],
+    "get_end_state": [],
+    "get_joint_states": [],
+    "get_motion_control_status": [],
+    "get_whole_body_status": [],
+    "joint_control_request": [
+     {
+      "default": false,
+      "kind": "positional",
+      "name": "request"
+     }
+    ],
+    "joint_servo_control": [
+     {
+      "default": false,
+      "kind": "positional",
+      "name": "request"
+     },
+     {
+      "default": true,
+      "kind": "positional",
+      "name": "enable_low_latency"
+     }
+    ],
+    "move_arm_joint": [
+     {
+      "default": false,
+      "kind": "positional",
+      "name": "positions"
+     },
+     {
+      "default": false,
+      "kind": "positional",
+      "name": "velocities"
+     },
+     {
+      "default": false,
+      "kind": "positional",
+      "name": "control_group"
+     }
+    ],
+    "move_ee_pos": [
+     {
+      "default": false,
+      "kind": "positional",
+      "name": "command"
+     }
+    ],
+    "move_head_joint": [
+     {
+      "default": false,
+      "kind": "positional",
+      "name": "positions"
+     },
+     {
+      "default": false,
+      "kind": "positional",
+      "name": "velocities"
+     }
+    ],
+    "move_waist_joint": [
+     {
+      "default": false,
+      "kind": "positional",
+      "name": "positions"
+     },
+     {
+      "default": false,
+      "kind": "positional",
+      "name": "velocities"
+     }
+    ],
+    "set_control_mode": [
+     {
+      "default": false,
+      "kind": "positional",
+      "name": "control_mode"
+     }
+    ]
+   }
+  },
+  "TF": {
+   "attributes": [],
+   "methods": {
+    "can_transform": [
+     {
+      "default": false,
+      "kind": "positional",
+      "name": "target_frame"
+     },
+     {
+      "default": false,
+      "kind": "positional",
+      "name": "source_frame"
+     }
+    ],
+    "get_all_frame_names": [],
+    "get_tf_from_base_link": [
+     {
+      "default": false,
+      "kind": "positional",
+      "name": "child_frame_id"
+     }
+    ],
+    "get_tf_from_sensor": [
+     {
+      "default": false,
+      "kind": "positional",
+      "name": "sensor_extrinsic_type"
+     }
+    ],
+    "lookup_transform_latest": [
+     {
+      "default": false,
+      "kind": "positional",
+      "name": "target_frame"
+     },
+     {
+      "default": false,
+      "kind": "positional",
+      "name": "source_frame"
+     },
+     {
+      "default": true,
+      "kind": "positional",
+      "name": "return_timestamp"
+     }
+    ]
+   }
+  },
+  "Transform": {
+   "attributes": [
+    "rotation",
+    "translation"
+   ],
+   "methods": {
+    "__init__": []
+   }
+  },
+  "Twist": {
+   "attributes": [
+    "angular",
+    "linear"
+   ],
+   "methods": {
+    "__init__": []
+   }
+  },
+  "Vector3": {
+   "attributes": [
+    "x",
+    "y",
+    "z"
+   ],
+   "methods": {
+    "__init__": [
+     {
+      "default": true,
+      "kind": "positional",
+      "name": "x"
+     },
+     {
+      "default": true,
+      "kind": "positional",
+      "name": "y"
+     },
+     {
+      "default": true,
+      "kind": "positional",
+      "name": "z"
+     }
+    ]
+   }
+  },
+  "Wrench": {
+   "attributes": [
+    "force",
+    "torque"
+   ],
+   "methods": {
+    "__init__": []
+   }
+  }
+ },
+ "enums": {
+  "CameraType": {
+   "kHandLeftColor": 6,
+   "kHandRightColor": 7,
+   "kHeadColor": 8,
+   "kHeadDepth": 9,
+   "kHeadStereoLeft": 4,
+   "kHeadStereoRight": 5
+  },
+  "ColorFormat": {
+   "BGR": 1,
+   "GRAY16": 3,
+   "GRAY8": 2,
+   "RGB": 0,
+   "RS2_FORMAT_Z16": 4
+  },
+  "Encoding": {
+   "JPEG": 1,
+   "PNG": 2,
+   "UNCOMPRESSED": 0
+  },
+  "EndEffectorControlGroup": {
+   "kBothArms": 3,
+   "kLeftArm": 1,
+   "kRightArm": 2,
+   "kUnknown": 0
+  },
+  "GDKRes": {
+   "kInvalidInput": 1,
+   "kInvalidOutput": 2,
+   "kRuntimeError": 3,
+   "kSuccess": 0,
+   "kUnknown": 4
+  },
+  "SensorExtrinsicType": {
+   "kHeadDepthToHeadColor": 1,
+   "kHeadRGBDToHeadLink3": 2,
+   "kLeftHandRGBDToArmLEndLink": 3,
+   "kRightHandRGBDToArmREndLink": 4
+  }
+ },
+ "functions": {
+  "gdk_init": [],
+  "gdk_release": [],
+  "get_app_version": []
+ }
+}

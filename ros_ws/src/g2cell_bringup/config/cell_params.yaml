@@ -1,0 +1,52 @@
+# Parameters for the cell.launch.py nodes (use_sim_time comes from the launch argument).
+g2cell_motion_server:
+  ros__parameters:
+    rate_hz: 50.0              # /joint_command stream rate (best effort)
+    max_joint_vel: 1.1         # rad/s, min-jerk peak joint speed
+    min_segment_time: 0.6      # s
+    gripper_time: 0.8          # s per open/close
+    head_clearance: 0.20       # m, arm links vs head_link3 origin + head camera
+    fixture_check: true        # arm links + fingertips vs cell_colliders.json boxes along every path
+    fixture_margin: 0.04       # m (a sweep through the pack carton's wall threw the carton, datagen 2026-10-11)
+    ik_attempts: 6             # seeded + fixed-seed jittered /compute_ik calls per waypoint (no local IK)
+    # deterministic fast planning (docs/OPTIMISATION.md "Motion planning")
+    local_ik: true             # numpy DLS IK from the staged URDF, /compute_ik confirms each answer
+    ik_confirm: true
+    ik_fallback_attempts: 0    # /compute_ik calls per waypoint when the local IK finds nothing; 0 = local only:
+                               # KDL's randomised 0.1 s search made PickBag plans differ run to run (Bag_02)
+    plan_max_ik_solves: 600    # planning budget per goal (0 = unbounded)
+    plan_max_seconds: 60.0
+    plan_cache: /g2cell_output/plan_cache/motion_server.json   # "" = off; dropped when the layout changes
+    guard_discovery_wait: 2.0  # s of discovery before the single-publisher check
+    action_name: /g2cell/move_arm
+    # waist-first turning (g2cell_motion/waist_policy.py); goal.waist_mode overrides waist_mode
+    waist_mode: waist_first    # waist_first | fixed | absolute
+    waist_cone_deg: 30.0       # target bearing allowed relative to the torso
+    waist_max_turn_deg: 100.0  # |waist yaw| bound (joint limit 174.5 deg)
+    waist_pivot: [0.258, 0.0]  # waist axis at arm-base height, base_link xy
+    twist_j1_max_deg: 90.0     # reject IK with arm joint1 further than this from home
+    twist_jump_max: 1.5        # rad, reject IK whose joint 3/5/7 jumps more than this from the seed
+    waist_fallback_step_deg: 15.0  # fallback waist yaws step back toward the current yaw (PickBag Bag_02 needs 15)
+    waist_fallback_orients: 0  # orientations tried per fallback waist profile (0 = all 24)
+    # named_poses_file: defaults to share/g2cell_motion/config/named_poses.yaml
+
+g2cell_pick_bag_server:
+  ros__parameters:
+    move_arm_action: /g2cell/move_arm
+    grasp_check: none          # none | gripper (gripper-joint heuristic, not validated in sim yet)
+    grasp_settle_time: 0.3
+    approach_clear_pose: clear # named pose before the approach from home ("" = off): lifts the hand off the carton
+    motion_timeout: 120.0      # s per MoveArm goal; > plan_max_seconds (60) + the motion, so a slow plan is not
+                               # canceled under a running goal (the next goal would then be refused BUSY)
+    # tasks_file: defaults to share/g2cell_tasks/config/tasks.yaml
+
+g2cell_cell_manager:
+  ros__parameters:
+    crate_fill_target: 10      # spec: e.g. 10 bags per crate
+    bags_on_table: 3           # Stage 2 placeholders
+    crate_at_pack_position: true   # static Stage 2 cell; Stage 3 senses it
+    status_rate_hz: 2.0
+    record_episodes: false     # true: EpisodeControl START/STOP drives g2cell_recorder
+    scene: scene_g2cell
+    seed: -1
+    episodes_dir: /g2cell_output/episodes

@@ -1,0 +1,17 @@
+# Upstream launcher_ovrtx_isaac_physx.yaml + render_ovrtx `lidar: true` (the render node only builds
+# lidar render products / publishes /lidar/* when this parameter is set). Used by mobile_up.sh.
+launcher:
+  physics:
+    engine: genie_sim_engine
+    engines:
+      genie_sim_engine:
+        package: genie_sim_engine
+        executable: genie_sim_engine_isaacsim.py
+        name: genie_sim_engine
+    industrial_bridge: ""
+  renders: ["render_ovrtx"]
+render_ovrtx:
+  ros__parameters:
+    lidar: true
+    plugin:
+      - genie_sim_render/RosImagePublisherPlugin

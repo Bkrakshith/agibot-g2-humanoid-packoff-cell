@@ -1,0 +1,51 @@
+# Paid GPU server: RTX A6000 48 GB, 8 vCPU, 44 GB RAM.
+#   cd g2_packoff_cell
+#   python -m g2cell_learning.train --config ros_ws/src/g2cell_learning/configs/server_a6000.yaml --dry-run
+#   python -m g2cell_learning.train --config ros_ws/src/g2cell_learning/configs/server_a6000.yaml
+# Any key can be overridden on the command line (--batch-size 128, --no-compile, ...).
+# Relative paths are relative to the current directory. Flat YAML (parsed without PyYAML too).
+
+episodes:
+  - output/episodes/*/*.hdf5              # teleop recordings (output/episodes/<name>/<name>.hdf5)
+  - output/episodes/*/ep_s*/ep_s*.hdf5    # g2cell_datagen batches (output/episodes/<batch>/ep_sNNNNN/)
+out_dir: output/train/a6000_act
+resume: auto                  # restart after preemption: picks up out_dir/checkpoints/last.pt
+
+# model
+policy: act
+backbone: resnet18            # trained from scratch (weights=None)
+d_model: 256
+chunk_size: 20
+image_size: [160, 256]        # keeps the 640x400 head camera's 1.6 aspect
+extra_cameras: []
+
+# optimisation: 48 GB holds batch 256 of ResNet-18 @ 160x256 in bf16 with plenty to spare
+batch_size: 256
+grad_accum: 1                 # raise (not batch_size) if you raise image_size and run out of memory
+lr: 3.0e-4                    # ~linear scaling from the 1e-4 @ 16-32 used on CPU
+weight_decay: 1.0e-4
+steps: 30000
+loss: l1
+amp: auto                     # bf16 on Ampere; fp16 + GradScaler on GPUs without bf16
+channels_last: true
+compile: false                # try --compile after the dry run (first steps compile for ~1 min)
+
+# input pipeline: 8 vCPU = 6 loader workers + main process + headroom
+cache_dir: output/cache       # uint8 memmap frames, built once (prepare_cache.py)
+cache_workers: 8
+num_workers: 6
+pin_memory: true
+persistent_workers: true
+prefetch_factor: 4
+threads: 2
+
+# validation, checkpoints, early stopping
+val_fraction: 0.1
+eval_every: 500
+val_batches: 8
+ckpt_every: 5000
+ckpt_minutes: 10              # a preempted server loses at most ~10 min of training
+early_stop_patience: 8        # = 4000 steps without val improvement
+early_stop_min_delta: 0.0
+bench_steps: 30
+price_per_hour: 0.0           # set to the server's hourly price for a cost estimate in --dry-run

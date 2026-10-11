@@ -1,0 +1,15 @@
+# Start/stop an episode and mark its outcome (optionally records it with g2cell_recorder).
+uint8 START=0
+uint8 STOP=1
+uint8 MARK_SUCCESS=2
+uint8 MARK_FAILURE=3
+uint8 command
+string episode_id                # START only: "" = auto-generated name
+---
+uint8 STATUS_OK=0
+uint8 STATUS_NOT_IMPLEMENTED=1
+uint8 STATUS_REJECTED=2
+bool success
+uint8 status
+string message
+string episode_id

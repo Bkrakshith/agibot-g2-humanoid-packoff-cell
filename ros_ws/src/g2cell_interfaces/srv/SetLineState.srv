@@ -1,0 +1,12 @@
+# Conveyor control (Stage 3). Until Stage 3 lands the server answers STATUS_NOT_IMPLEMENTED.
+uint8 RUN=0
+uint8 STOP=1
+uint8 RELEASE_CRATE=2            # manual "release" button: drop the gate, crate leaves, next indexes in
+uint8 command
+---
+uint8 STATUS_OK=0
+uint8 STATUS_NOT_IMPLEMENTED=1
+uint8 STATUS_REJECTED=2
+bool success
+uint8 status
+string message

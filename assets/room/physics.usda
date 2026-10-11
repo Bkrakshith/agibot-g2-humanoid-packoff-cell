@@ -1,0 +1,83 @@
+#usda 1.0
+(
+    defaultPrim = "Room"
+    kilogramsPerUnit = 1
+    metersPerUnit = 1
+    upAxis = "Z"
+)
+
+over "Room"
+{
+    def "PhysicsMaterials"
+    {
+        def Material "EpoxyFloor" (
+            prepend apiSchemas = ["PhysicsMaterialAPI"]
+        )
+        {
+            float physics:dynamicFriction = 0.6
+            float physics:restitution = 0
+            float physics:staticFriction = 0.6
+        }
+
+        def Material "PVCWall" (
+            prepend apiSchemas = ["PhysicsMaterialAPI"]
+        )
+        {
+            float physics:dynamicFriction = 0.5
+            float physics:restitution = 0
+            float physics:staticFriction = 0.5
+        }
+    }
+
+    over "Colliders"
+    {
+        over "Floor"
+        {
+            over "Box" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "MaterialBindingAPI"]
+            )
+            {
+                rel material:binding:physics = </Room/PhysicsMaterials/EpoxyFloor> (
+                    bindMaterialAs = "weakerThanDescendants"
+                )
+            }
+        }
+
+        over "Wall_PosX" (
+            prepend apiSchemas = ["PhysicsCollisionAPI", "MaterialBindingAPI"]
+        )
+        {
+            rel material:binding:physics = </Room/PhysicsMaterials/PVCWall> (
+                bindMaterialAs = "weakerThanDescendants"
+            )
+        }
+
+        over "Wall_NegX" (
+            prepend apiSchemas = ["PhysicsCollisionAPI", "MaterialBindingAPI"]
+        )
+        {
+            rel material:binding:physics = </Room/PhysicsMaterials/PVCWall> (
+                bindMaterialAs = "weakerThanDescendants"
+            )
+        }
+
+        over "Wall_PosY" (
+            prepend apiSchemas = ["PhysicsCollisionAPI", "MaterialBindingAPI"]
+        )
+        {
+            rel material:binding:physics = </Room/PhysicsMaterials/PVCWall> (
+                bindMaterialAs = "weakerThanDescendants"
+            )
+        }
+
+        over "Wall_NegY" (
+            prepend apiSchemas = ["PhysicsCollisionAPI", "MaterialBindingAPI"]
+        )
+        {
+            rel material:binding:physics = </Room/PhysicsMaterials/PVCWall> (
+                bindMaterialAs = "weakerThanDescendants"
+            )
+        }
+    }
+}
+

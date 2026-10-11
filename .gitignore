@@ -1,0 +1,21 @@
+# run outputs: renders, episodes, logs (tens of GB)
+output/
+docker/build.log
+
+# colcon
+ros_ws/build/
+ros_ws/install/
+ros_ws/log/
+
+# python
+__pycache__/
+*.pyc
+.pytest_cache/
+
+# local-only lists
+*.local.txt
+
+# project page build products (published on the gh-pages branch)
+website/index.html
+website/static/videos/
+website/static/images/*.png

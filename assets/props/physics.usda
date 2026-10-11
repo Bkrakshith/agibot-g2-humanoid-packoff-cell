@@ -1,0 +1,161 @@
+#usda 1.0
+(
+    defaultPrim = "Props"
+    kilogramsPerUnit = 1
+    metersPerUnit = 1
+    upAxis = "Z"
+)
+
+over "Props"
+{
+    def "PhysicsMaterials"
+    {
+        def Material "HDPE" (
+            prepend apiSchemas = ["PhysicsMaterialAPI"]
+        )
+        {
+            float physics:dynamicFriction = 0.5
+            float physics:restitution = 0
+            float physics:staticFriction = 0.5
+        }
+
+        def Material "Wood" (
+            prepend apiSchemas = ["PhysicsMaterialAPI"]
+        )
+        {
+            float physics:dynamicFriction = 0.5
+            float physics:restitution = 0
+            float physics:staticFriction = 0.5
+        }
+
+        def Material "Stainless" (
+            prepend apiSchemas = ["PhysicsMaterialAPI"]
+        )
+        {
+            float physics:dynamicFriction = 0.3
+            float physics:restitution = 0
+            float physics:staticFriction = 0.3
+        }
+
+        def Material "PaintedSteel" (
+            prepend apiSchemas = ["PhysicsMaterialAPI"]
+        )
+        {
+            float physics:dynamicFriction = 0.4
+            float physics:restitution = 0
+            float physics:staticFriction = 0.4
+        }
+    }
+
+    over "CrateStack"
+    {
+        over "Colliders"
+        {
+            over "Stack" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "MaterialBindingAPI"]
+            )
+            {
+                rel material:binding:physics = </Props/PhysicsMaterials/HDPE> (
+                    bindMaterialAs = "weakerThanDescendants"
+                )
+            }
+        }
+    }
+
+    over "PalletStack"
+    {
+        over "Colliders"
+        {
+            over "Pallet" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "MaterialBindingAPI"]
+            )
+            {
+                rel material:binding:physics = </Props/PhysicsMaterials/Wood> (
+                    bindMaterialAs = "weakerThanDescendants"
+                )
+            }
+
+            over "Crates" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "MaterialBindingAPI"]
+            )
+            {
+                rel material:binding:physics = </Props/PhysicsMaterials/HDPE> (
+                    bindMaterialAs = "weakerThanDescendants"
+                )
+            }
+        }
+    }
+
+    over "WasteBin"
+    {
+        over "Colliders"
+        {
+            over "Body" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "MaterialBindingAPI"]
+            )
+            {
+                rel material:binding:physics = </Props/PhysicsMaterials/HDPE> (
+                    bindMaterialAs = "weakerThanDescendants"
+                )
+            }
+        }
+    }
+
+    over "HandwashStation"
+    {
+        over "Colliders"
+        {
+            over "Pedestal" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "MaterialBindingAPI"]
+            )
+            {
+                rel material:binding:physics = </Props/PhysicsMaterials/Stainless> (
+                    bindMaterialAs = "weakerThanDescendants"
+                )
+            }
+
+            over "Basin" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "MaterialBindingAPI"]
+            )
+            {
+                rel material:binding:physics = </Props/PhysicsMaterials/Stainless> (
+                    bindMaterialAs = "weakerThanDescendants"
+                )
+            }
+
+            over "Splashback" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "MaterialBindingAPI"]
+            )
+            {
+                rel material:binding:physics = </Props/PhysicsMaterials/Stainless> (
+                    bindMaterialAs = "weakerThanDescendants"
+                )
+            }
+        }
+    }
+
+    over "LightCurtainPost"
+    {
+        over "Colliders"
+        {
+            over "BasePlate" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "MaterialBindingAPI"]
+            )
+            {
+                rel material:binding:physics = </Props/PhysicsMaterials/PaintedSteel> (
+                    bindMaterialAs = "weakerThanDescendants"
+                )
+            }
+
+            over "Post" (
+                prepend apiSchemas = ["PhysicsCollisionAPI", "MaterialBindingAPI"]
+            )
+            {
+                rel material:binding:physics = </Props/PhysicsMaterials/PaintedSteel> (
+                    bindMaterialAs = "weakerThanDescendants"
+                )
+            }
+        }
+    }
+}
+

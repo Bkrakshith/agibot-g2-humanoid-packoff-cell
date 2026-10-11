@@ -1,0 +1,14 @@
+# Upstream launcher_ovrtx_isaac_physx.yaml with NO render node: stage1_up.sh / mobile_up.sh with
+# PROFILE=collect|teleop|showcase start render_ovrtx themselves via scripts/render_profile.py, which
+# picks the RTX render mode, render_fps (upstream hard-codes 30 after the YAML params), the cameras
+# actually rendered (FreeCam on/off) and lidar on/off. Physics engine and its params are unchanged.
+launcher:
+  physics:
+    engine: genie_sim_engine
+    engines:
+      genie_sim_engine:
+        package: genie_sim_engine
+        executable: genie_sim_engine_isaacsim.py
+        name: genie_sim_engine
+    industrial_bridge: ""
+  renders: []

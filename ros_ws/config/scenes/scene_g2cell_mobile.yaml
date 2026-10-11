@@ -1,0 +1,107 @@
+# g2_packoff_cell mobile scene (Layout v2 drive-in demo + SLAM / Nav2). Same cell USD as scene_g2cell.yaml
+# (Layout v2: U-shaped cell opening toward -X), but the G2 base is FREE (pin_base_to_world: false, like
+# upstream scene_wbc_g2_sp) and starts OUTSIDE the U, 2 m behind its working pose, facing the conveyor (+X).
+# g2cell_demo drive_in / packing_demo drive it into the U (working pose = cell origin) on /cmd_twist.
+# MoveIt: WITH_MOVEIT=1 bash mobile_up.sh (move_group only; IK in base_link). Two OVRTX OmniLidars on base_link (/lidar/livox_front,
+# /lidar/livox_back, + the render node's /lidar/merged in base_link).
+#
+# Launch:  bash /g2cell_ws/scripts/mobile_up.sh          (NOT stage1_up.sh: needs the lidar launcher
+#          config + lidar prims injected into the staged robot USD; see g2cell_slam/README.md)
+#
+# LiDAR mounts: the official G2 USD (geniesim_assets/robot/G2_omnipicker/robot.usda) carries only
+# cameras (head front/left/right, 3 fisheyes, wrist) and NO lidar prims, and the G2 URDF/xacro has
+# no livox links, so there is no official mount pose in the local assets. The real robot publishes
+# /lidar/livox_front and /lidar/livox_back (Genie-02 GDK manual 5.1.4). The poses below are
+# ESTIMATED: just outside the chassis hull (base_link mesh X -0.375..0.382, Y +-0.318) at z 0.18,
+# front facing +X, back facing -X. scripts/inject_lidars.py authors them into the staged robot USD.
+robot:
+  robot_name: G2_crs_omnipicker
+  robot_prefix: genie
+  robot_source:
+    arm: crs
+    body: g2
+    gripper: "omnipicker"
+    robot_model: genie
+    package: genie_sim_robot_model
+    pin_base_to_world: false   # free base: driven through /cmd_twist -> servo_node -> /cmd_4ws
+    convert_joints_to_fixed: []
+    urdf: {}
+  # Layout v2: 2.0 m behind the working pose, on the U's centreline, facing +X (into the U). The
+  # chassis front (+0.382) is then at X -1.62, 0.54 m clear of the rack's -X end (X -1.085).
+  # Stage-2 / SLAM start was (3.4, 0, pi) east of the old cell; that floor now holds the sealer/palletiser.
+  # z 0.04: wheels on the floor (lowest robot point -0.041 in robot.usda).
+  init_base_pose:
+    x: -2.0
+    y: 0.0
+    z: 0.04
+    theta: 0.0
+  init_joint_pos:
+    # DRIVE TUCK (Layout v2): joint2 -90, joint4 -110, joint6 -30 keeps every arm link within |Y| <= 0.30 m
+    # of base_link (URDF FK of the arm meshes), inside the 0.318 m chassis, so the arms clear the rack
+    # totes (inner edge Y -0.43) at shoulder height. The cell scene's home (-45/-75/-55) spreads the elbows
+    # to |Y| 0.484 m. packing_demo moves tuck -> home after the base has stopped.
+    idx22_arm_l_joint2: -90
+    idx24_arm_l_joint4: -110
+    idx26_arm_l_joint6: -30
+    idx62_arm_r_joint2: -90
+    idx64_arm_r_joint4: -110
+    idx66_arm_r_joint6: -30
+    idx03_body_joint3: 20
+    # head looking ahead and slightly down while driving (packing_demo turns it to the table later)
+    idx13_head_joint3: 20
+
+# FreeCam: high above the -X wall, looking down the U's opening: frames the whole line (erector ->
+# conveyor -> drop gap/floor bin -> transfer -> sealer -> palletiser), the U and the drive-in lane
+# (chosen from 4 test stills; from the -Y side the rack hides the robot inside the U). Applied by scripts/free_cam_pose.py
+# (the launcher ignores viewer_camera).
+free_cam_width: 1280
+free_cam_height: 720
+viewer_camera:
+  pos:    [-4.2, -0.3, 3.85]
+  lookat: [1.2, -0.5, 0.0]
+
+cameras:
+- prim_path: head_link3/Head_Front_Camera
+  frame_id: head_link3
+  topic:
+    rgb: /genie_sim/head_front_camera_rgb
+    depth: /genie_sim/head_front_camera_depth
+  sensor:
+    width: 640
+    height: 400
+    freq: 10.0
+    min_range: 0.01
+    max_range: 10000
+  intrinsic:
+    cx: 318.7979431152
+    cy: 202.4943847656
+    fx: 305.6425170898
+    fy: 305.6007080078
+    k1: 0
+    k2: 0
+    p1: 0
+    p2: 0
+    k3: 0
+  # official head_front_Camera mount (see scene_g2cell.yaml); needs head_cam_tf_relay.py
+  extrinsic:
+    xyz: [0.10237, 0.02375, 0.10256]
+    wxyz: [0.5945104121873723, 0.3868316461705512, -0.3787291472834019, -0.5945442627086477]
+
+# Genie Sim lidar schema (assemble_scene.py): prim_path is relative to the robot USD root and must be
+# an OmniLidar prim; <body> = first path element; the render node publishes each cloud on `topic`
+# in the sensor frame (= topic basename) and all of them merged on /lidar/merged in base_link.
+# Requires the render node param lidar:=true (config/launchers/launcher_ovrtx_isaac_physx_lidar.yaml).
+lidars:
+- prim_path: base_link/livox_front
+  topic: /lidar/livox_front
+  frame_id: base_link
+  mount:            # read by scripts/inject_lidars.py (ESTIMATED, see header)
+    xyz: [0.40, 0.0, 0.18]
+    yaw_deg: 0.0
+- prim_path: base_link/livox_back
+  topic: /lidar/livox_back
+  frame_id: base_link
+  mount:
+    xyz: [-0.40, 0.0, 0.18]
+    yaw_deg: 180.0
+scene: scenes/g2cell/cell.usda

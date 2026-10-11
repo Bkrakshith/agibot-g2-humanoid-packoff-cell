@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<package format="3">
+  <name>g2cell_teleop</name>
+  <version>0.2.0</version>
+  <description>Keyboard / SpaceMouse end-effector teleop for the AgiBot G2 in Genie Sim (MoveIt /compute_ik to /joint_command), with episode recording control.</description>
+  <maintainer email="bangrak2000@gmail.com">Rakshith</maintainer>
+  <license>Apache-2.0</license>
+  <exec_depend>rclpy</exec_depend>
+  <exec_depend>sensor_msgs</exec_depend>
+  <exec_depend>geometry_msgs</exec_depend>
+  <exec_depend>moveit_msgs</exec_depend>
+  <exec_depend>launch</exec_depend>
+  <exec_depend>launch_ros</exec_depend>
+  <exec_depend>ament_index_python</exec_depend>
+  <exec_depend>g2cell_recorder</exec_depend>
+  <exec_depend>g2cell_motion</exec_depend>
+  <!-- SpaceMouse over ROS topics (/spacenav/twist, /spacenav/joy); pyspacemouse is an optional pip fallback -->
+  <exec_depend>spacenav</exec_depend>
+  <test_depend>python3-pytest</test_depend>
+  <test_depend>python3-yaml</test_depend>
+  <export><build_type>ament_python</build_type></export>
+</package>

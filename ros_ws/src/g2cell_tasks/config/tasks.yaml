@@ -1,0 +1,44 @@
+# g2cell_tasks configuration (cell frame: origin = G2 base on the floor, +X conveyor, +Y robot's left).
+max_grasp_attempts: 2
+
+# Rigid placeholder bags, FINAL Layout v2 positions (assets/cell/build.py LAYOUT["bags"]; table turned
+# -90 deg, centre (-0.215, 0.73), spawn zone X -0.665..0.235 x Y 0.48..0.98). Stage 5 replaces this list
+# with the spawner's BagInfo. top_z = table top 0.87 + bag height 0.07. Bag_01 is the one the Layout v2
+# demo picks (waist +55 deg, MoveIt + fixture-checked); Bag_03 (Y 0.90) is at the edge of reach.
+bags:
+  - {id: Bag_01, variant: standard, label: good,   xy: [0.05, 0.62],  top_z: 0.94}
+  - {id: Bag_02, variant: standard, label: good,   xy: [-0.25, 0.62], top_z: 0.94}
+  - {id: Bag_03, variant: standard, label: good,   xy: [-0.10, 0.90], top_z: 0.94}
+
+# Place targets. FINAL Layout v2: sort rack at (0.0, -0.82) on the robot's RIGHT, open front facing +Y,
+# ONE lane column x 2 levels (assets/cell/build.py, assets/cell/README.md "Layout v2"); totes L1_1 / L2_1
+# at X 0.0. Drop point = front strip of the tote opening (Y -0.45, inside the front rim; the L2 shelf
+# covers the rest of the L1 opening); the Layout v2 demo's verified drop (fingertips 0.10 m above the
+# opening along its normal) is (0.0, -0.415, 1.121), right arm, waist -95 deg.
+# Layout v2 rack = 1 column x 2 levels (L1_1 lower, L2_1 upper). The old second column (L1_2/L2_2) was
+# behind the robot and unreachable, so it was removed.
+targets:
+  crate_xy: [0.60, 0.0]
+  crate_rim_z: 1.07            # belt top 0.82 + open carton 0.25 (Layout v2 cartons replace crates)
+  lanes:
+    L1_1: [0.0, -0.45, 1.04]       # red, lower level (lip 0.75)
+    L2_1: [0.0, -0.45, 1.59]       # green, upper level (lip 1.30): above the right arm's planner reach
+
+# Spec sort rule: good -> pack crate; reject and other SKUs -> their rack lane.
+sort_rules:
+  good_label: good
+  lanes: {reject: L1_1, sample: L2_1}   # L2_1 is marginal for the right arm (see rack_lane_arms)
+  default_lane: L1_1             # any other SKU name: the reliably reachable tote
+
+# Reachability (stationary base): table/crate from MoveIt /compute_ik (assets/cell/README.md), rack lanes
+# from the offline Layout v2 waist sweep (output/reach/reach_summary_waist.json, top-down, pinocchio).
+reachability:
+  waist_first: true            # table picks / rack drops turn the waist toward the target; carton at waist 0
+  left_table_max_y: 0.85
+  right_reaches_table: false
+  crate_arms: [left, right]
+  rack_arms: [left, right]     # lanes not listed below
+  rack_lane_arms:              # preference order, waist turned toward the rack
+    L1_1: [right, left]        # right 67% of the opening (any waist), left 50% (waist turned)
+    L2_1: [right]              # right 17%, waist -60..-75 deg only
+  rack_verified: false         # offline kinematics only, no MoveIt / collision check

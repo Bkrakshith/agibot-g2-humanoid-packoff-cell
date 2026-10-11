@@ -1,0 +1,79 @@
+# G2 pack-off cell image: the Genie Sim base plus everything the cell stack needs at run time.
+#
+# Stages (BuildKit builds only the stages the target needs):
+#   cell     base + apt/pip runtime deps. genie_sim (/workspace) and ros_ws (/g2cell_ws) are bind-mounted
+#            and built inside the container (`geniesim ros build dev`, `colcon build`): the dev workflow.
+#   baked    cell + both ROS workspaces prebuilt under /opt/g2cell/prebuilt. docker/cell.sh up copies them
+#            into the bind mounts when those have no build yet, so a fresh server needs no colcon build.
+#            Editing and rebuilding in the container works exactly as with `cell`.
+#   final    (last stage) = cell, so a plain `docker build` never needs the baked build contexts.
+#
+# Build:
+#   docker build -f docker/Dockerfile.cell -t g2cell/cell:dev docker/                      # cell
+#   docker buildx build -f docker/Dockerfile.cell --target baked \
+#     --build-context geniesim_ros=../genie_sim/source/geniesim_ros/src/ros_ws \
+#     --build-context g2cell_src=ros_ws/src -t g2cell/cell:baked docker/                    # baked
+# scripts/build_and_push.sh and docker/build_all.sh (BAKED=1) pass these for you.
+ARG BASE_IMAGE=g2cell/geniesim:3.2.0-isaac6.0.1.0
+
+FROM ${BASE_IMAGE} AS cell
+
+# One apt layer for everything that was hand-installed into the running container:
+#   foxglove-bridge                   Foxglove viewing through an SSH tunnel
+#   spacenav                          SpaceMouse teleop (g2cell_teleop device:=spacemouse)
+#   slam-toolbox, pointcloud-to-laserscan, navigation2, nav2-bringup     g2cell_slam
+#   rosbag2-storage-mcap              MCAP episodes (g2cell_recorder); normally already pulled in by ros-jazzy-desktop
+#   tmux                              stage1_up.sh / mobile_up.sh run every process in a tmux window
+RUN apt-get update && apt-get install -y --no-install-recommends \
+        ros-jazzy-foxglove-bridge \
+        ros-jazzy-spacenav \
+        ros-jazzy-slam-toolbox \
+        ros-jazzy-pointcloud-to-laserscan \
+        ros-jazzy-navigation2 \
+        ros-jazzy-nav2-bringup \
+        ros-jazzy-rosbag2-storage-mcap \
+        tmux \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
+
+# h5py for g2cell_recorder's bag_to_hdf5. From pip, not apt: Debian's python3-h5py is built against
+# numpy 1.x and fails to import next to the image's pip numpy 2.x. --no-deps keeps that numpy untouched;
+# the import check fails the build if the wheel does not match it.
+RUN python3 -m pip install --no-cache-dir --no-deps "h5py>=3.12" \
+    && python3 -c "import h5py, numpy; print('h5py', h5py.__version__, 'numpy', numpy.__version__)"
+
+# ------------------------------------------------------------------------------------------------
+FROM cell AS baked
+
+# Recorded in /opt/g2cell/prebuilt/STAMP; cell.sh compares them with the bind mounts before seeding.
+ARG GENIESIM_SHA=unknown
+ARG G2CELL_WS_HASH=unknown
+
+# Both builds run at the paths they are used from (/workspace, /g2cell_ws), because colcon writes
+# absolute paths and genie_sim's dev build is --symlink-install (links point into
+# /workspace/source/..., which the bind-mounted checkout provides at run time). The sources are
+# bind-mounted for this RUN only (rw = writes are discarded), so they add nothing to the image.
+# Same colcon flags as `geniesim ros build dev` (genie_sim) and the plain `colcon build` used in
+# /g2cell_ws. Object files are dropped (~400 MB); an incremental rebuild then recompiles.
+RUN --mount=type=bind,from=geniesim_ros,target=/workspace/source/geniesim_ros/src/ros_ws,rw \
+    --mount=type=bind,from=g2cell_src,target=/g2cell_ws/src,rw \
+    bash -eo pipefail -c '\
+      source /opt/ros/jazzy/setup.bash; \
+      cd /workspace/source/geniesim_ros/src/ros_ws; \
+      colcon --log-base /tmp/colcon_log build \
+        --build-base /workspace/devel_build --install-base /workspace/devel \
+        --merge-install --parallel-workers "$(nproc)" --symlink-install \
+        --cmake-args -DCMAKE_BUILD_TYPE=RelWithDebInfo -DCMAKE_EXPORT_COMPILE_COMMANDS=ON; \
+      source /workspace/devel/setup.bash; \
+      cd /g2cell_ws; \
+      colcon --log-base /tmp/colcon_log build; \
+      find /workspace/devel_build -name "*.o" -delete; \
+      mkdir -p /opt/g2cell/prebuilt/workspace /opt/g2cell/prebuilt/g2cell_ws; \
+      mv /workspace/devel /workspace/devel_build /opt/g2cell/prebuilt/workspace/; \
+      mv /g2cell_ws/install /opt/g2cell/prebuilt/g2cell_ws/; \
+      rm -rf /g2cell_ws/build /tmp/colcon_log; \
+      printf "GENIESIM_SHA=%s\nG2CELL_WS_HASH=%s\n" "$GENIESIM_SHA" "$G2CELL_WS_HASH" > /opt/g2cell/prebuilt/STAMP; \
+      chmod -R a+rX /opt/g2cell'
+
+# ------------------------------------------------------------------------------------------------
+FROM cell AS final

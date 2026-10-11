@@ -1,0 +1,23 @@
+g2cell_gdk_sim: a Genie Sim backed implementation of the agibot_gdk 3.3.8 Python API.
+
+The public API shape of this package (module, class, function and enum names, call signatures,
+request/return structures and their attribute names) follows the agibot_gdk 3.3.8 stand-in in
+
+    agibot-gdk-training
+    https://github.com/SailnMobula/agibot-gdk-training
+    commit 29e4dc3 (2026-10-07)
+    Licensed under the Apache License, Version 2.0
+    http://www.apache.org/licenses/LICENSE-2.0
+
+in particular fake/agibot_gdk/__init__.py, the exercise READMEs and the reference solutions.
+The behaviour, the ROS 2 backend and all code in this package are original work. The file
+test/fake_surface_3.3.8.json is a machine-extracted list of that stand-in's public names and
+signatures, used to detect API drift. agibot-gdk-training itself is not redistributed here;
+run_training_solutions.sh runs it from a separate checkout.
+
+Further enum members (CameraType, SensorExtrinsicType, EndEffectorControlGroup, ColorFormat) and
+the real soft joint limits come from the GDK v2.3.4 reference in agibot-gdk-skil
+(https://github.com/SailnMobula/agibot-gdk-skil, commit 7ec86ca, MIT licence).
+
+This package contains no AgiBot code. "AgiBot", "GDK" and "agibot_gdk" are names of AgiBot's
+product, used here only to identify the API this package is compatible with.

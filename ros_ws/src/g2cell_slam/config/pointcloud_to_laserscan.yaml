@@ -1,0 +1,20 @@
+# 2D slice of the merged chassis-lidar cloud (/lidar/merged_full from cloud_merger, frame base_link) -> /scan.
+# base_link origin is ~0.04 m above the floor (init z 0.04). Slice z 0.05..0.60 in base_link =
+# 0.09..0.64 m above the floor: below the hanging arms/grippers, above floor returns from the
+# -7/-4 deg channels; sees walls, kick plates, conveyor/rack/table legs, props.
+# range_min 0.55: drops returns from the G2's own wheels/chassis (hull half-diagonal ~0.49 m).
+pointcloud_to_laserscan:
+  ros__parameters:
+    use_sim_time: false
+    target_frame: base_link
+    transform_tolerance: 0.05
+    min_height: 0.05
+    max_height: 0.60
+    angle_min: -3.14159
+    angle_max: 3.14159
+    angle_increment: 0.0087   # 0.5 deg
+    scan_time: 0.25
+    range_min: 0.55
+    range_max: 15.0
+    use_inf: true
+    inf_epsilon: 1.0

@@ -1,0 +1,25 @@
+# Pick one bag and place it in the pack crate or a rack lane (g2cell_tasks pick_bag_server,
+# action /g2cell/pick_bag). Stages: approach -> grasp -> lift -> transfer -> place -> retract.
+string ANY=any
+string TARGET_CRATE=crate
+string TARGET_RACK_LANE=rack_lane
+
+string bag_id                    # a bag id, or "any" = first reachable bag still on the table
+string target                    # crate | rack_lane | "" = from the bag's label (sort rule)
+string lane                      # rack lane id (L1_1, L1_2, L2_1, L2_2); "" = from the sort rule
+string arm                       # left | right | "" = from the reachability table
+---
+g2cell_interfaces/PickPlaceResult result
+---
+uint8 STAGE_APPROACH=0
+uint8 STAGE_GRASP=1
+uint8 STAGE_LIFT=2
+uint8 STAGE_TRANSFER=3
+uint8 STAGE_PLACE=4
+uint8 STAGE_RETRACT=5
+uint8 STAGE_RECOVER=6
+uint8 stage
+string stage_name
+string arm
+string bag_id
+uint8 grasp_attempt              # 1-based

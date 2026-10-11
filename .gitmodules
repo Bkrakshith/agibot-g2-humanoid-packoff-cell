@@ -1,0 +1,3 @@
+[submodule "ros_ws/third_party/agibot-gdk-training"]
+	path = ros_ws/third_party/agibot-gdk-training
+	url = https://github.com/SailnMobula/agibot-gdk-training.git

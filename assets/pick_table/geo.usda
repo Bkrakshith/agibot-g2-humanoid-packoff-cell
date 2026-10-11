@@ -1,0 +1,326 @@
+#usda 1.0
+(
+    defaultPrim = "PickTable"
+    kilogramsPerUnit = 1
+    metersPerUnit = 1
+    upAxis = "Z"
+)
+
+def Xform "PickTable"
+{
+    def Scope "Looks"
+    {
+        def Material "BrushedStainless"
+        {
+            token outputs:surface.connect = </PickTable/Looks/BrushedStainless/PreviewSurface.outputs:surface>
+
+            def Shader "PreviewSurface"
+            {
+                uniform token info:id = "UsdPreviewSurface"
+                color3f inputs:diffuseColor = (0.78, 0.78, 0.77)
+                float inputs:metallic = 1
+                float inputs:roughness = 0.35
+                token outputs:surface
+            }
+        }
+
+        def Material "StainlessTube"
+        {
+            token outputs:surface.connect = </PickTable/Looks/StainlessTube/PreviewSurface.outputs:surface>
+
+            def Shader "PreviewSurface"
+            {
+                uniform token info:id = "UsdPreviewSurface"
+                color3f inputs:diffuseColor = (0.72, 0.72, 0.72)
+                float inputs:metallic = 1
+                float inputs:roughness = 0.25
+                token outputs:surface
+            }
+        }
+
+        def Material "FootPad"
+        {
+            token outputs:surface.connect = </PickTable/Looks/FootPad/PreviewSurface.outputs:surface>
+
+            def Shader "PreviewSurface"
+            {
+                uniform token info:id = "UsdPreviewSurface"
+                color3f inputs:diffuseColor = (0.15, 0.15, 0.15)
+                float inputs:metallic = 0
+                float inputs:roughness = 0.8
+                token outputs:surface
+            }
+        }
+    }
+
+    def Cube "Top" (
+        prepend apiSchemas = ["MaterialBindingAPI"]
+    )
+    {
+        rel material:binding = </PickTable/Looks/BrushedStainless>
+        color3f[] primvars:displayColor = [(0.78, 0.78, 0.77)]
+        double size = 1
+        float3 xformOp:scale = (0.6, 1, 0.03)
+        double3 xformOp:translate = (0, 0, 0.855)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
+    }
+
+    def Xform "Lips"
+    {
+        def Cube "LipPosX" (
+            prepend apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            rel material:binding = </PickTable/Looks/BrushedStainless>
+            color3f[] primvars:displayColor = [(0.78, 0.78, 0.77)]
+            double size = 1
+            float3 xformOp:scale = (0.003, 1, 0.025)
+            double3 xformOp:translate = (0.2985, 0, 0.8825)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
+        }
+
+        def Cube "LipNegX" (
+            prepend apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            rel material:binding = </PickTable/Looks/BrushedStainless>
+            color3f[] primvars:displayColor = [(0.78, 0.78, 0.77)]
+            double size = 1
+            float3 xformOp:scale = (0.003, 1, 0.025)
+            double3 xformOp:translate = (-0.2985, 0, 0.8825)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
+        }
+
+        def Cube "LipPosY" (
+            prepend apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            rel material:binding = </PickTable/Looks/BrushedStainless>
+            color3f[] primvars:displayColor = [(0.78, 0.78, 0.77)]
+            double size = 1
+            float3 xformOp:scale = (0.594, 0.003, 0.025)
+            double3 xformOp:translate = (0, 0.4985, 0.8825)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
+        }
+    }
+
+    def Xform "Frame"
+    {
+        def Cube "Leg1" (
+            prepend apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            rel material:binding = </PickTable/Looks/StainlessTube>
+            color3f[] primvars:displayColor = [(0.78, 0.78, 0.77)]
+            double size = 1
+            float3 xformOp:scale = (0.04, 0.04, 0.77)
+            double3 xformOp:translate = (0.25, 0.45, 0.45499999999999996)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
+        }
+
+        def Cylinder "Foot1" (
+            prepend apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            uniform token axis = "Z"
+            float3[] extent = [(-0.03, -0.03, -0.02), (0.03, 0.03, 0.02)]
+            double height = 0.04
+            rel material:binding = </PickTable/Looks/FootPad>
+            color3f[] primvars:displayColor = [(0.15, 0.15, 0.15)]
+            double radius = 0.03
+            double3 xformOp:translate = (0.25, 0.45, 0.02)
+            uniform token[] xformOpOrder = ["xformOp:translate"]
+        }
+
+        def Cylinder "FootStem1" (
+            prepend apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            uniform token axis = "Z"
+            float3[] extent = [(-0.008, -0.008, -0.015), (0.008, 0.008, 0.015)]
+            double height = 0.03
+            rel material:binding = </PickTable/Looks/StainlessTube>
+            color3f[] primvars:displayColor = [(0.78, 0.78, 0.77)]
+            double radius = 0.008
+            double3 xformOp:translate = (0.25, 0.45, 0.055)
+            uniform token[] xformOpOrder = ["xformOp:translate"]
+        }
+
+        def Cube "Leg2" (
+            prepend apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            rel material:binding = </PickTable/Looks/StainlessTube>
+            color3f[] primvars:displayColor = [(0.78, 0.78, 0.77)]
+            double size = 1
+            float3 xformOp:scale = (0.04, 0.04, 0.77)
+            double3 xformOp:translate = (-0.25, 0.45, 0.45499999999999996)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
+        }
+
+        def Cylinder "Foot2" (
+            prepend apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            uniform token axis = "Z"
+            float3[] extent = [(-0.03, -0.03, -0.02), (0.03, 0.03, 0.02)]
+            double height = 0.04
+            rel material:binding = </PickTable/Looks/FootPad>
+            color3f[] primvars:displayColor = [(0.15, 0.15, 0.15)]
+            double radius = 0.03
+            double3 xformOp:translate = (-0.25, 0.45, 0.02)
+            uniform token[] xformOpOrder = ["xformOp:translate"]
+        }
+
+        def Cylinder "FootStem2" (
+            prepend apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            uniform token axis = "Z"
+            float3[] extent = [(-0.008, -0.008, -0.015), (0.008, 0.008, 0.015)]
+            double height = 0.03
+            rel material:binding = </PickTable/Looks/StainlessTube>
+            color3f[] primvars:displayColor = [(0.78, 0.78, 0.77)]
+            double radius = 0.008
+            double3 xformOp:translate = (-0.25, 0.45, 0.055)
+            uniform token[] xformOpOrder = ["xformOp:translate"]
+        }
+
+        def Cube "Leg3" (
+            prepend apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            rel material:binding = </PickTable/Looks/StainlessTube>
+            color3f[] primvars:displayColor = [(0.78, 0.78, 0.77)]
+            double size = 1
+            float3 xformOp:scale = (0.04, 0.04, 0.77)
+            double3 xformOp:translate = (-0.25, -0.45, 0.45499999999999996)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
+        }
+
+        def Cylinder "Foot3" (
+            prepend apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            uniform token axis = "Z"
+            float3[] extent = [(-0.03, -0.03, -0.02), (0.03, 0.03, 0.02)]
+            double height = 0.04
+            rel material:binding = </PickTable/Looks/FootPad>
+            color3f[] primvars:displayColor = [(0.15, 0.15, 0.15)]
+            double radius = 0.03
+            double3 xformOp:translate = (-0.25, -0.45, 0.02)
+            uniform token[] xformOpOrder = ["xformOp:translate"]
+        }
+
+        def Cylinder "FootStem3" (
+            prepend apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            uniform token axis = "Z"
+            float3[] extent = [(-0.008, -0.008, -0.015), (0.008, 0.008, 0.015)]
+            double height = 0.03
+            rel material:binding = </PickTable/Looks/StainlessTube>
+            color3f[] primvars:displayColor = [(0.78, 0.78, 0.77)]
+            double radius = 0.008
+            double3 xformOp:translate = (-0.25, -0.45, 0.055)
+            uniform token[] xformOpOrder = ["xformOp:translate"]
+        }
+
+        def Cube "Leg4" (
+            prepend apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            rel material:binding = </PickTable/Looks/StainlessTube>
+            color3f[] primvars:displayColor = [(0.78, 0.78, 0.77)]
+            double size = 1
+            float3 xformOp:scale = (0.04, 0.04, 0.77)
+            double3 xformOp:translate = (0.25, -0.45, 0.45499999999999996)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
+        }
+
+        def Cylinder "Foot4" (
+            prepend apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            uniform token axis = "Z"
+            float3[] extent = [(-0.03, -0.03, -0.02), (0.03, 0.03, 0.02)]
+            double height = 0.04
+            rel material:binding = </PickTable/Looks/FootPad>
+            color3f[] primvars:displayColor = [(0.15, 0.15, 0.15)]
+            double radius = 0.03
+            double3 xformOp:translate = (0.25, -0.45, 0.02)
+            uniform token[] xformOpOrder = ["xformOp:translate"]
+        }
+
+        def Cylinder "FootStem4" (
+            prepend apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            uniform token axis = "Z"
+            float3[] extent = [(-0.008, -0.008, -0.015), (0.008, 0.008, 0.015)]
+            double height = 0.03
+            rel material:binding = </PickTable/Looks/StainlessTube>
+            color3f[] primvars:displayColor = [(0.78, 0.78, 0.77)]
+            double radius = 0.008
+            double3 xformOp:translate = (0.25, -0.45, 0.055)
+            uniform token[] xformOpOrder = ["xformOp:translate"]
+        }
+
+        def Xform "CrossBrace"
+        {
+            def Cube "RailPosX" (
+                prepend apiSchemas = ["MaterialBindingAPI"]
+            )
+            {
+                rel material:binding = </PickTable/Looks/StainlessTube>
+                color3f[] primvars:displayColor = [(0.78, 0.78, 0.77)]
+                double size = 1
+                float3 xformOp:scale = (0.03, 0.86, 0.03)
+                double3 xformOp:translate = (0.25, 0, 0.15)
+                uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
+            }
+
+            def Cube "RailNegX" (
+                prepend apiSchemas = ["MaterialBindingAPI"]
+            )
+            {
+                rel material:binding = </PickTable/Looks/StainlessTube>
+                color3f[] primvars:displayColor = [(0.78, 0.78, 0.77)]
+                double size = 1
+                float3 xformOp:scale = (0.03, 0.86, 0.03)
+                double3 xformOp:translate = (-0.25, 0, 0.15)
+                uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
+            }
+
+            def Cube "RailCentre" (
+                prepend apiSchemas = ["MaterialBindingAPI"]
+            )
+            {
+                rel material:binding = </PickTable/Looks/StainlessTube>
+                color3f[] primvars:displayColor = [(0.78, 0.78, 0.77)]
+                double size = 1
+                float3 xformOp:scale = (0.47, 0.03, 0.03)
+                double3 xformOp:translate = (0, 0, 0.15)
+                uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
+            }
+        }
+    }
+
+    def Xform "SpawnZone"
+    {
+        double3 xformOp:translate = (0, 0, 0.965)
+        uniform token[] xformOpOrder = ["xformOp:translate"]
+
+        def Cube "Volume"
+        {
+            color3f[] primvars:displayColor = [(0.1, 0.8, 0.2)]
+            uniform token purpose = "guide"
+            double size = 1
+            token visibility = "invisible"
+            float3 xformOp:scale = (0.5, 0.9, 0.15)
+            double3 xformOp:translate = (0, 0, 0)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
+        }
+    }
+}
+
