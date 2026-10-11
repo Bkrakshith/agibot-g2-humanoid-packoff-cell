@@ -1,6 +1,6 @@
 # AgiBot G2 model files (what exists, where it is)
 
-AgiBot publishes no standalone G2 SDK (see PLAN.md, track D). The robot **models** are public,
+AgiBot publishes no standalone G2 SDK: the G2 GDK installs only from the robot. The robot **models** are public,
 through Genie Sim. All paths are relative to `~/ntu_dev/Agibot_dev/`.
 
 | Format | What | Local path | Source |

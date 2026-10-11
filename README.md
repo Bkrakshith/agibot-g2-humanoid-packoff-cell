@@ -4,9 +4,11 @@
 https://bkrakshith.github.io/agibot-g2-humanoid-packoff-cell/
 
 AgiBot G2 bagged-salad pack-off cell in Genie Sim (Isaac Sim), run headless in Docker,
-teleoperated from a keyboard over SSH. The build spec and acceptance checks live in the separate
-document "Isaac Sim Build Spec – G2 Salad Pack-Off Cell". [PLAN.md](PLAN.md) records the decisions and the
-state of each stage.
+teleoperated from a keyboard over SSH.
+
+> **Non-commercial use only.** The code is Apache-2.0, but the cell runs only with the AgiBot G2 model and
+> GenieSimAssets scene assets, which are CC BY-NC-SA 4.0. Thus this repository, as a working cell, is strictly
+> for non-commercial use. See [Licence](#licence).
 
 ## Prerequisites (host: this workstation or the Paperspace machine)
 
@@ -142,7 +144,7 @@ standalone PhysX settle or drop test of `cell.usda`; run it with the sim stopped
 
 The cell is now a U the G2 drives into (table left, conveyor front, sort rack right, open toward -X), with cartons on
 the line, a case erector, a drop gap with a floor bin, a right-angle transfer, a case sealer and a cobot palletiser.
-Numbers, reach tables and deviations: [assets/cell/README.md](assets/cell/README.md) "Layout v2"; checks in PLAN.md.
+Numbers, reach tables and deviations: [assets/cell/README.md](assets/cell/README.md) "Layout v2".
 
 ```bash
 .venv-tools/bin/python assets/cell/build.py          # cell.usda + cell_colliders.json
@@ -266,3 +268,14 @@ the server's vCPUs ([docs/OPTIMISATION.md "Sim runtime"](docs/OPTIMISATION.md)).
 Everything is safe to rerun. Full flow, hour-by-hour plan and cost controls:
 [docs/OPTIMISATION.md "Build & deploy"](docs/OPTIMISATION.md#build--deploy); machine choice, SSH/Foxglove
 tunnelling and the build-on-the-GPU-box fallback (`BAKED=1 docker/build_all.sh`): [docs/PAPERSPACE.md](docs/PAPERSPACE.md).
+
+## Licence
+
+The code in this repository is licensed under the Apache License, Version 2.0 (see [LICENSE](LICENSE)).
+If you share this work or a work that you built on it, keep the [NOTICE](NOTICE) file and give this credit:
+"Based on agibot-g2-humanoid-packoff-cell by Bkrakshith (https://github.com/Bkrakshith/agibot-g2-humanoid-packoff-cell)".
+
+**Non-commercial use only.** The cell needs the AgiBot G2 model and the GenieSimAssets scene assets (AgiBot World
+community licence, CC BY-NC-SA 4.0). This repository does not contain them, and they do not permit commercial use.
+Thus this repository, as a working cell, is strictly for non-commercial use. Genie Sim (the base image) is MPL 2.0,
+and the `agibot-gdk-training` submodule is Apache 2.0.

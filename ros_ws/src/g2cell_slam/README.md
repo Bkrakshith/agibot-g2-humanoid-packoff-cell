@@ -41,7 +41,7 @@ To record video, start these before the drive or goal (both start and stop on `/
   `wait_for_start:=true`
 - `python3 /g2cell_ws/scripts/map_frames.py --out <dir> --wait`
 
-Then run `scripts/make_slam_video.sh`. The exact commands are in PLAN.md ("Use-case: SLAM/Nav").
+Then run `scripts/make_slam_video.sh`.
 
 ## Interfaces (measured)
 

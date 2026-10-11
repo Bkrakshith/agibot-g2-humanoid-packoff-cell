@@ -213,7 +213,7 @@ Phase B, GPU box (billed from power-on):
 | 0:20 | GPU box | `sudo reboot`, then rerun `scripts/server_setup.sh` (self-test) | 4–5 min |
 | 0:25 | GPU box | `docker login`; `scripts/pull_on_server.sh` (download ~26 GB, unpack ~56 GB); meanwhile `sudo scripts/idle_shutdown.sh install` | 15–25 min |
 | 0:45 | GPU box | `scripts/session.sh collect`: container up, workspaces seeded, first launch compiles shaders (cached afterwards) | 8–12 min |
-| 0:55 | GPU box + laptop | Stage 1 check on Paperspace (open in PLAN): teleop, Foxglove app over `ssh -L 8765:...`, one recorded episode | 30 min |
+| 0:55 | GPU box + laptop | Stage 1 check on Paperspace (still open): teleop, Foxglove app over `ssh -L 8765:...`, one recorded episode | 30 min |
 | 1:25 | GPU box | real work: data collection / `session.sh showcase` renders | as planned |
 | end | both | `scripts/session.sh down --poweroff`; `scripts/sync_to_server.sh --pull-output` | 2 min |
 

@@ -19,3 +19,6 @@ __pycache__/
 website/index.html
 website/static/videos/
 website/static/images/*.png
+
+# private build plan and status notes
+PLAN.md

@@ -3,7 +3,7 @@
   <name>g2cell_demo</name>
   <version>0.1.0</version>
   <description>Scripted pick-and-place-like G2 motion for the pack-off cell (MoveIt /compute_ik waypoints, joint-space interpolation on /joint_command), IK reachability check, and camera-to-MP4 recorder.</description>
-  <maintainer email="bangrak2000@gmail.com">Rakshith</maintainer>
+  <maintainer email="123905355+Bkrakshith@users.noreply.github.com">Rakshith</maintainer>
   <license>Apache-2.0</license>
   <exec_depend>rclpy</exec_depend>
   <exec_depend>g2cell_motion</exec_depend>

@@ -3,7 +3,7 @@
   <name>g2cell_tasks</name>
   <version>0.1.0</version>
   <description>Pack-off cell task layer: PickBag action server (pure, tested pick/place state machine on top of g2cell_motion's MoveArm), arm selection from the reachability table, sort-rule target selection, outcome classification, and the cell_manager skeleton (CellStatus, SetLineState, SpawnBags, EpisodeControl).</description>
-  <maintainer email="bangrak2000@gmail.com">Rakshith</maintainer>
+  <maintainer email="123905355+Bkrakshith@users.noreply.github.com">Rakshith</maintainer>
   <license>Apache-2.0</license>
   <exec_depend>rclpy</exec_depend>
   <exec_depend>ament_index_python</exec_depend>

@@ -3,7 +3,7 @@
   <name>g2cell_gdk_sim</name>
   <version>0.1.0</version>
   <description>Sim-backed agibot_gdk (AgiBot GDK 3.3.8 Python API) for Genie Sim: GDK Python code written for the real G2 (joint states, status, joint/servo/end-effector/gripper commands, TF, head camera) runs unchanged against the simulation. API shape from agibot-gdk-training (Apache-2.0).</description>
-  <maintainer email="bangrak2000@gmail.com">Rakshith</maintainer>
+  <maintainer email="123905355+Bkrakshith@users.noreply.github.com">Rakshith</maintainer>
   <license>Apache-2.0</license>
   <exec_depend>rclpy</exec_depend>
   <exec_depend>sensor_msgs</exec_depend>

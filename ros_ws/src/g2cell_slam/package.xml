@@ -3,7 +3,7 @@
   <name>g2cell_slam</name>
   <version>0.1.0</version>
   <description>SLAM (slam_toolbox) and Nav2 navigation for the mobile AgiBot G2 in the Genie Sim pack-off cell room: lidar PointCloud2 -> LaserScan, mapping and localization+Nav2 launch files, a cmd_vel -> /cmd_twist bridge, a scripted mapping drive, and a NavigateToPose evaluation client.</description>
-  <maintainer email="bangrak2000@gmail.com">Rakshith</maintainer>
+  <maintainer email="123905355+Bkrakshith@users.noreply.github.com">Rakshith</maintainer>
   <license>Apache-2.0</license>
   <exec_depend>rclpy</exec_depend>
   <exec_depend>geometry_msgs</exec_depend>

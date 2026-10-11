@@ -3,7 +3,7 @@
   <name>g2cell_bringup</name>
   <version>0.1.0</version>
   <description>Launch files and parameters for the G2 pack-off cell use-case stack (cell.launch.py, teleop_record.launch.py) and the check_stack health script.</description>
-  <maintainer email="bangrak2000@gmail.com">Rakshith</maintainer>
+  <maintainer email="123905355+Bkrakshith@users.noreply.github.com">Rakshith</maintainer>
   <license>Apache-2.0</license>
   <exec_depend>rclpy</exec_depend>
   <exec_depend>launch</exec_depend>

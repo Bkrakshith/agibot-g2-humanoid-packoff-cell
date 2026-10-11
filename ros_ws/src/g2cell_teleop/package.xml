@@ -3,7 +3,7 @@
   <name>g2cell_teleop</name>
   <version>0.2.0</version>
   <description>Keyboard / SpaceMouse end-effector teleop for the AgiBot G2 in Genie Sim (MoveIt /compute_ik to /joint_command), with episode recording control.</description>
-  <maintainer email="bangrak2000@gmail.com">Rakshith</maintainer>
+  <maintainer email="123905355+Bkrakshith@users.noreply.github.com">Rakshith</maintainer>
   <license>Apache-2.0</license>
   <exec_depend>rclpy</exec_depend>
   <exec_depend>sensor_msgs</exec_depend>

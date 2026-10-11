@@ -3,7 +3,7 @@
   <name>g2cell_recorder</name>
   <version>0.1.0</version>
   <description>Episode recording for the G2 cell: ros2 bag (MCAP) to one HDF5 episode file with a fixed-rate aligned view.</description>
-  <maintainer email="bangrak2000@gmail.com">Rakshith</maintainer>
+  <maintainer email="123905355+Bkrakshith@users.noreply.github.com">Rakshith</maintainer>
   <license>Apache-2.0</license>
   <exec_depend>rosbag2_py</exec_depend>
   <exec_depend>rosbag2_storage_mcap</exec_depend>

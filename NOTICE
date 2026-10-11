@@ -1,0 +1,20 @@
+agibot-g2-humanoid-packoff-cell
+Copyright 2026 Bkrakshith (https://github.com/Bkrakshith)
+
+The code in this repository is licensed under the Apache License, Version 2.0 (see LICENSE).
+
+Attribution. Section 4 of the licence requires that any redistribution or derivative work keeps this
+NOTICE file and shows its attribution. If you use this work or build on it, give this credit in your
+documentation, in the credits of your product, and in your source distribution:
+
+    Based on agibot-g2-humanoid-packoff-cell by Bkrakshith (https://github.com/Bkrakshith/agibot-g2-humanoid-packoff-cell)
+
+Non-commercial use only. The cell runs only with third-party assets that this repository does not
+contain: the AgiBot G2 model and the scene assets from GenieSimAssets (AgiBot World community licence,
+CC BY-NC-SA 4.0). Those assets do not permit commercial use. Thus this repository, as a working cell, is
+strictly for non-commercial use only. Commercial use needs a separate licence for those assets from
+their owners.
+
+Third-party components keep their own licences:
+- AgiBot Genie Sim (Mozilla Public License 2.0), used as the base Docker image.
+- agibot-gdk-training (Apache License 2.0), a git submodule in ros_ws/third_party/.
