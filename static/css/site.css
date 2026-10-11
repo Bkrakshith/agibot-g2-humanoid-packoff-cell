@@ -58,3 +58,5 @@ pre.bibtex { background: #fff; border: 1px solid var(--line); border-radius: 8px
 .figure-caption { color: var(--muted); font-size: .92rem; margin: .5rem 0 1.5rem; text-align: center; }
 @media (max-width: 768px) { .figure-pair { grid-template-columns: 1fr; } }
 .figure-img.narrow { max-width: 620px; display: block; margin: 0 auto; }
+.nc-callout { border-left-color: #c2410c; background: #fff7ed; margin-top: 1.5rem; }
+.nc-callout p { margin: 0; }
