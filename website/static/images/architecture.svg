@@ -17,6 +17,8 @@
       .d{stroke-dasharray:6 5}
     </style>
   </defs>
+  <!-- opaque background: the figure stays readable on a dark page (GitHub dark mode) -->
+  <rect width="1200" height="480" rx="14" fill="#ffffff"/>
 
   <text x="20" y="62" class="grp">INPUTS</text>
   <rect x="20" y="74" width="230" height="66" rx="10" class="box in"/>
