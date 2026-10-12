@@ -1,0 +1,145 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 849" width="1024" height="849" font-family="Inter, Noto Sans, Helvetica, Arial, sans-serif" role="img" aria-labelledby="t d">
+<title id="t">Pack-off cell, Layout v2, top view</title>
+<desc id="d">Top view of the U cell. The G2 drives in from the open floor. The pick table is on its left, the conveyor is in front and the sort rack is on its right. Cartons move from the case erector along the conveyor, over a drop gap with a floor bin, to a right-angle transfer, the case sealer and the cobot palletiser.</desc>
+<defs>
+<marker id="ar" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
+<path d="M0,0 L10,5 L0,10 z" fill="#c2410c"/></marker>
+<marker id="ag" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+<path d="M0,0 L10,5 L0,10 z" fill="#1f2733"/></marker>
+<marker id="aw" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
+<path d="M0,0 L10,5 L0,10 z" fill="context-stroke"/></marker>
+<pattern id="rollers" width="7.5" height="7.5" patternUnits="userSpaceOnUse">
+<rect width="7.5" height="7.5" fill="#e6eaef"/><line x1="3.75" y1="0" x2="3.75" y2="7.5" stroke="#bcc5cf" stroke-width="2.2"/></pattern>
+<pattern id="rollersH" width="7.5" height="7.5" patternUnits="userSpaceOnUse">
+<rect width="7.5" height="7.5" fill="#e6eaef"/><line x1="0" y1="3.75" x2="7.5" y2="3.75" stroke="#bcc5cf" stroke-width="2.2"/></pattern>
+<pattern id="hatch" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+<rect width="8" height="8" fill="#fbeaea"/><line x1="0" y1="0" x2="0" y2="8" stroke="#e7a3a3" stroke-width="2.4"/></pattern>
+<style>
+.bg{fill:#ffffff}
+.floor{fill:#f4f5f7}
+.wall{stroke:#8d96a3;stroke-width:8;fill:none;stroke-linecap:square}
+.open{stroke:#b4bcc6;stroke-width:1.5;fill:none;stroke-dasharray:4 6}
+.mach{fill:#eef5ff;stroke:#7aa7e0;stroke-width:1.6}
+.conv{fill:url(#rollers);stroke:#8d96a3;stroke-width:1.6}
+.rat{fill:url(#rollersH);stroke:#8d96a3;stroke-width:1.6}
+.table{fill:#e9edf1;stroke:#8d96a3;stroke-width:1.6}
+.carton{fill:#ecd0a6;stroke:#9a6a33;stroke-width:1.3}
+.cartonS{fill:#d2a46c;stroke:#9a6a33;stroke-width:1.3}
+.pack{fill:#ecd0a6;stroke:#c2410c;stroke-width:3}
+.bag{fill:#86c25a;stroke:#4d7f2a;stroke-width:1.2}
+.tote{fill:#d64541;stroke:#8e1e1b;stroke-width:1.3}
+.toteG{fill:none;stroke:#2e8b57;stroke-width:2.4;stroke-dasharray:5 3}
+.bin{fill:url(#hatch);stroke:#c0392b;stroke-width:1.6}
+.pallet{fill:#ead8b5;stroke:#9a7a46;stroke-width:1.2}
+.cobot{fill:#ffffff;stroke:#5b6472;stroke-width:1.6}
+.reach{fill:none;stroke:#9aa3ae;stroke-width:1.2;stroke-dasharray:3 5}
+.zone{fill:none;stroke:#4d7f2a;stroke-width:1.4;stroke-dasharray:6 4}
+.g2{fill:#2b3340;stroke:#11161d;stroke-width:1.6}
+.g2ghost{fill:#ffffff;fill-opacity:0.6;stroke:#5b6472;stroke-width:1.6;stroke-dasharray:7 5}
+.flow{stroke:#c2410c;stroke-width:3.5;fill:none;marker-end:url(#ar);stroke-linecap:round;stroke-linejoin:round}
+.drive{stroke:#1f2733;stroke-width:2.4;fill:none;stroke-dasharray:9 6;marker-end:url(#ag)}
+.ray{stroke-width:2.6;fill:none;marker-end:url(#aw);stroke-linecap:round}
+.lead{stroke:#5b6472;stroke-width:1;fill:none}
+text{paint-order:stroke;stroke:#ffffff;stroke-width:4px;stroke-linejoin:round}
+.lbl{font-size:15px;fill:#1f2733;font-weight:700}
+.sm{font-size:13px;fill:#4a5462}
+.flowt{font-size:13px;fill:#c2410c;font-weight:700}
+.ttl{font-size:22px;font-weight:800;fill:#1f2733}
+.sub{font-size:13.5px;fill:#4a5462}
+.key{font-size:13.5px;fill:#1f2733}
+.wh{font-size:13px;fill:#ffffff;font-weight:800;stroke:none}
+</style></defs>
+<rect width="1024" height="849" rx="16" class="bg"/>
+<rect x="22.0" y="22.0" width="980.0" height="805.0" rx="0" class="floor"/>
+<path class="wall" d="M22.0,827.0 L22.0,22.0 L1002.0,22.0 L1002.0,827.0"/>
+<path class="open" d="M22.0,827.0 L1002.0,827.0"/>
+<rect x="112.0" y="432.0" width="220.0" height="140.0" rx="8" class="mach"/>
+<text x="222.0" y="455.0" class="lbl" text-anchor="middle">Case erector</text>
+<rect x="692.5" y="472.0" width="80.0" height="60.0" rx="2" class="bin"/>
+<rect x="722.0" y="467.0" width="70.0" height="70.0" rx="2" class="rat" opacity="0.9"/>
+<rect x="707.0" y="307.0" width="100.0" height="160.0" rx="8" class="mach"/>
+<rect x="597.0" y="87.0" width="320.0" height="220.0" rx="10" class="mach"/>
+<rect x="637.0" y="137.0" width="80.0" height="120.0" rx="2" class="pallet"/>
+<rect x="797.0" y="137.0" width="80.0" height="120.0" rx="2" class="pallet"/>
+<rect x="677.0" y="197.0" width="40.0" height="60.0" rx="1" class="cartonS"/>
+<rect x="637.0" y="197.0" width="40.0" height="60.0" rx="1" class="cartonS"/>
+<rect x="677.0" y="137.0" width="40.0" height="60.0" rx="1" class="cartonS"/>
+<rect x="637.0" y="137.0" width="40.0" height="60.0" rx="1" class="cartonS"/>
+<circle cx="757.0" cy="197.0" r="130.0" class="reach"/>
+<circle cx="757.0" cy="197.0" r="15" class="cobot"/>
+<text x="757.0" y="176.0" class="sm" text-anchor="middle">cobot</text>
+<text x="757.0" y="109.0" class="lbl" text-anchor="middle">Cobot palletiser</text>
+<text x="677.0" y="257.0" class="sm" text-anchor="middle">12 sealed cartons</text>
+<rect x="737.0" y="357.0" width="40.0" height="60.0" rx="1" class="cartonS"/>
+<rect x="737.0" y="229.0" width="40.0" height="60.0" rx="1" class="cartonS"/>
+<text x="697.0" y="392.0" class="lbl" text-anchor="end">Case sealer</text>
+<rect x="332.0" y="473.5" width="360.0" height="57.0" rx="2" class="conv"/>
+<rect x="262.0" y="482.0" width="60.0" height="40.0" rx="2" class="carton"/>
+<rect x="337.0" y="482.0" width="60.0" height="40.0" rx="2" class="carton"/>
+<rect x="407.0" y="482.0" width="60.0" height="40.0" rx="2" class="carton"/>
+<rect x="572.0" y="482.0" width="60.0" height="40.0" rx="2" class="carton"/>
+<rect x="482.0" y="482.0" width="60.0" height="40.0" rx="2" class="pack"/>
+<rect x="587.0" y="491.5" width="30.0" height="21.0" rx="5" class="bag"/>
+<line x1="492.0" y1="482.0" x2="532.0" y2="482.0" stroke="#c2410c" stroke-width="2"/>
+<line x1="477.0" y1="526.0" x2="477.0" y2="478.0" stroke="#7a42c2" stroke-width="1.6" stroke-dasharray="3 3"/>
+<text x="407.0" y="462.0" class="lbl" text-anchor="middle">Conveyor, 3.6 m</text>
+<path class="lead" d="M512.0,476.0 L512.0,434.0"/>
+<text x="512.0" y="425.0" class="lbl" text-anchor="middle">Pack position</text>
+<text x="512.0" y="443.0" class="sm" text-anchor="middle">stop gate, photo-eye</text>
+<rect x="409.0" y="533.5" width="60.0" height="100.0" rx="3" class="table"/>
+<rect x="414.0" y="538.5" width="50.0" height="90.0" rx="2" class="zone"/>
+<rect x="435.0" y="546.5" width="30.0" height="21.0" rx="6" class="bag"/>
+<g transform="rotate(-4 450.0 587.0)"><rect x="435.0" y="576.5" width="30.0" height="21.0" rx="6" class="bag"/></g>
+<g transform="rotate(-90 422.0 572.0)"><rect x="407.0" y="561.5" width="30.0" height="21.0" rx="6" class="bag"/></g>
+<text x="400.0" y="588.5" class="lbl" text-anchor="end">Pick table</text>
+<text x="400.0" y="606.5" class="sm" text-anchor="end">bags in the spawn zone</text>
+<rect x="561.5" y="534.5" width="65.0" height="55.0" rx="3" class="table"/>
+<rect x="564.0" y="542.0" width="58.0" height="40.0" rx="2" class="tote"/>
+<rect x="569.0" y="546.0" width="48.0" height="32.0" rx="2" class="toteG"/>
+<text x="636.0" y="567.0" class="lbl" text-anchor="start">Sort rack</text>
+<text x="636.0" y="585.0" class="sm" text-anchor="start">2 totes, 2 levels</text>
+<rect x="480.2" y="723.8" width="63.6" height="75.6" rx="20" class="g2ghost"/>
+<text x="512.0" y="767.0" class="sm" text-anchor="middle">G2 start</text>
+<path class="drive" d="M512.0,720.0 L512.0,604.0"/>
+<text x="526.0" y="659.0" class="sm" text-anchor="start">Drive-in: 2.0 m in 10.3 s</text>
+<text x="526.0" y="681.0" class="sm" text-anchor="start">0.112 m clearance at each side</text>
+<path class="ray" d="M512.0,562.0 L457.9,524.1" style="stroke:#3f7a1f"/>
+<path class="ray" d="M512.0,562.0 L512.0,510.0" style="stroke:#c2410c"/>
+<path class="ray" d="M512.0,562.0 L573.8,567.4" style="stroke:#b3261e"/>
+<rect x="480.2" y="523.8" width="63.6" height="75.6" rx="20" class="g2"/>
+<circle cx="512.0" cy="558.0" r="11" fill="#ffffff" stroke="#11161d" stroke-width="1.4"/>
+<text x="512.0" y="587.0" class="wh" text-anchor="middle">G2</text>
+<text x="452.0" y="520.0" class="flowt" text-anchor="middle" style="fill:#3f7a1f">+55°</text>
+<text x="562.0" y="607.0" class="flowt" text-anchor="start" style="fill:#b3261e">−95°</text>
+<path class="flow" d="M137.0,502.0 L250.0,502.0"/>
+<text x="192.0" y="531.0" class="flowt" text-anchor="middle">carton flow</text>
+<path class="flow" d="M636.0,502.0 L740.0,502.0 L757.0,487.0 L757.0,450.0"/>
+<path class="flow" d="M757.0,334.0 L757.0,290.0"/>
+<text x="757.0" y="559.0" class="sm" text-anchor="middle">Transfer</text>
+<text x="757.0" y="575.0" class="sm" text-anchor="middle" style="fill:#b3261e">floor bin below</text>
+<text x="42.0" y="60.0" class="ttl">Pack-off cell, Layout v2</text>
+<text x="42.0" y="81.0" class="sub">Top view. Room 9.8 × 9.8 m. Dimensions in metres.</text>
+<rect x="42.0" y="100.0" width="26" height="15" rx="2" class="pack"/>
+<text x="78.0" y="113.0" class="key">Carton at the pack position</text>
+<rect x="42.0" y="125.0" width="26" height="15" rx="2" class="bag"/>
+<text x="78.0" y="138.0" class="key">Bag (rigid placeholder)</text>
+<rect x="42.0" y="150.0" width="26" height="15" rx="2" class="tote"/>
+<text x="78.0" y="163.0" class="key">Totes: L1 red, L2 green (above)</text>
+<rect x="42.0" y="175.0" width="26" height="15" rx="2" class="bin"/>
+<text x="78.0" y="188.0" class="key">Floor bin for loose bags</text>
+<rect x="42.0" y="200.0" width="26" height="15" rx="2" class="mach"/>
+<text x="78.0" y="213.0" class="key">End-of-line machine</text>
+<path class="flow" d="M42.0,232.0 L68.0,232.0"/>
+<text x="78.0" y="238.0" class="key">Carton flow</text>
+<path class="ray" style="stroke:#3f7a1f" d="M42.0,257.0 L68.0,257.0"/>
+<text x="78.0" y="263.0" class="key">Waist direction: table, carton, tote</text>
+<rect x="57.0" y="786.0" width="50.0" height="7" fill="#1f2733"/>
+<rect x="107.0" y="786.0" width="50.0" height="7" fill="#ffffff" stroke="#1f2733"/>
+<text x="57.0" y="809.0" class="sm" text-anchor="middle">0</text>
+<text x="157.0" y="809.0" class="sm" text-anchor="middle">1 m</text>
+<path d="M252.0,724.0 L252.0,674.0" stroke="#1f2733" stroke-width="2.2" marker-end="url(#ag)"/>
+<path d="M252.0,724.0 L202.0,724.0" stroke="#1f2733" stroke-width="2.2" marker-end="url(#ag)"/>
+<text x="260.0" y="682.0" class="lbl" text-anchor="start">+X</text>
+<text x="202.0" y="746.0" class="lbl" text-anchor="middle">+Y</text>
+<text x="987.0" y="804.0" class="sm" text-anchor="end">Values: assets/cell/build.py, LAYOUT</text>
+</svg>
