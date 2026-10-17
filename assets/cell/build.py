@@ -1,7 +1,7 @@
 """Compose the Stage 2 static cell scene for Genie Sim (pxr only).
 
 Run:
-    /home/rakshith/ntu_dev/Agibot_dev/.venv-tools/bin/python assets/cell/build.py [--dest DIR]
+    ../.venv-tools/bin/python assets/cell/build.py [--dest DIR]
 
 DIR defaults to ../geniesim_assets/scenes/g2cell (mounted in the container as
 /geniesim_assets/scenes/g2cell). It writes:

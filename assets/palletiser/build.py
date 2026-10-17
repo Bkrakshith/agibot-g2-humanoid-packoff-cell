@@ -1,6 +1,6 @@
 """Generator for the `palletiser` asset: generic compact cobot palletising cell (static prop).
 
-Run:  /home/rakshith/ntu_dev/Agibot_dev/.venv-tools/bin/python assets/palletiser/build.py
+Run:  ../.venv-tools/bin/python assets/palletiser/build.py
 (build assets/cartons first: the stack references cartons/carton_sealed/geo.usda).
 Writes palletiser.usda, geo.usda, physics.usda, README.md next to this script.
 

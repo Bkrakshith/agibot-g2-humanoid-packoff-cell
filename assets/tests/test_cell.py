@@ -1,7 +1,7 @@
 """Tests for the composed cell scene written by assets/cell/build.py.
 
-Run: /home/rakshith/ntu_dev/Agibot_dev/.venv-tools/bin/python -m pytest assets/tests/test_cell.py
-(build first: .venv-tools/bin/python assets/cell/build.py)
+Run: ../.venv-tools/bin/python -m pytest assets/tests/test_cell.py
+(build first: ../.venv-tools/bin/python assets/cell/build.py)
 """
 
 import sys

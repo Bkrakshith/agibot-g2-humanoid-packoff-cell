@@ -1,6 +1,6 @@
 """Tests for assets/palletiser (static compact cobot palletising cell prop, generic).
 
-Run: /home/rakshith/ntu_dev/Agibot_dev/.venv-tools/bin/python -m pytest assets/tests/test_palletiser.py
+Run: ../.venv-tools/bin/python -m pytest assets/tests/test_palletiser.py
 """
 
 import re

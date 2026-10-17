@@ -9,9 +9,10 @@ sys.path.insert(0, str(PKG))
 sys.path.insert(0, str(PKG / "test"))
 
 # The cloned training repo (Apache-2.0, commit 29e4dc3). Tests that need it are skipped without it.
-TRAINING = pathlib.Path(os.environ.get(
-    "GDK_TRAINING_DIR", "/home/rakshith/ntu_dev/Agibot_dev/g2_sdk/community/agibot-gdk-training"))
-URDF = pathlib.Path(os.environ.get("G2_URDF", "/home/rakshith/ntu_dev/Agibot_dev/g2_viz_ws/g2_crs_omnipicker.urdf"))
+# Set GDK_TRAINING_DIR and G2_URDF to your checkouts; the defaults assume they sit next to this repository.
+_WORK = PKG.parents[3]  # the work folder that holds this repository
+TRAINING = pathlib.Path(os.environ.get("GDK_TRAINING_DIR", _WORK / "agibot-gdk-training"))
+URDF = pathlib.Path(os.environ.get("G2_URDF", _WORK / "g2_viz_ws" / "g2_crs_omnipicker.urdf"))
 SCENE = PKG.parents[1] / "config" / "scenes" / "scene_g2cell.yaml"
 
 

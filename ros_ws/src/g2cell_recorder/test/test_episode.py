@@ -1,5 +1,5 @@
 """Unit tests for the ROS-free episode logic. Run on the host:
-    .venv-tools/bin/python -m pytest ros_ws/src/g2cell_recorder/test
+    ../.venv-tools/bin/python -m pytest ros_ws/src/g2cell_recorder/test
 """
 from types import SimpleNamespace as NS
 

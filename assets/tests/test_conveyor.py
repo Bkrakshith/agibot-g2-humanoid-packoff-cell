@@ -1,6 +1,6 @@
 """Tests for assets/conveyor (powered roller conveyor, crates flow toward -Y).
 
-Run: /home/rakshith/ntu_dev/Agibot_dev/.venv-tools/bin/python -m pytest assets/tests/test_conveyor.py
+Run: ../.venv-tools/bin/python -m pytest assets/tests/test_conveyor.py
 """
 from pathlib import Path
 

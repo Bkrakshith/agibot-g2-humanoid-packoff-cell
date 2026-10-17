@@ -1,6 +1,6 @@
 """Tests for assets/floor_bin (static open-top red HDPE reject bin on castors).
 
-Run: /home/rakshith/ntu_dev/Agibot_dev/.venv-tools/bin/python -m pytest assets/tests/test_floor_bin.py
+Run: ../.venv-tools/bin/python -m pytest assets/tests/test_floor_bin.py
 """
 
 import re

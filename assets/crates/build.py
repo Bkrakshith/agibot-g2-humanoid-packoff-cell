@@ -1,7 +1,7 @@
 """Generate the three Euro-footprint crate assets (pxr only).
 
 Run:
-    /home/rakshith/ntu_dev/Agibot_dev/.venv-tools/bin/python assets/crates/build.py
+    ../.venv-tools/bin/python assets/crates/build.py
 
 Writes, for each variant in VARIANTS:
     assets/crates/<name>/<name>.usda   root: defaultPrim /<Prim> (Xform, kind=component),

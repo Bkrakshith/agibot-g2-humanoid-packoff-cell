@@ -1,6 +1,6 @@
 """Generate the background-clutter props asset (assets/props/*.usda).
 
-Run: /home/rakshith/ntu_dev/Agibot_dev/.venv-tools/bin/python assets/props/build.py
+Run: ../.venv-tools/bin/python assets/props/build.py
 
 One asset, defaultPrim /Props (kind=assembly) at the cell origin. Each prop is its own
 Xform /Props/<Name> (kind=component, ops translate + rotateZ) whose origin is the centre

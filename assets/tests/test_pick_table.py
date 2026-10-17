@@ -1,6 +1,6 @@
 """Tests for assets/pick_table (infeed / accumulation table on the robot's left).
 
-Run: /home/rakshith/ntu_dev/Agibot_dev/.venv-tools/bin/python -m pytest assets/tests/test_pick_table.py
+Run: ../.venv-tools/bin/python -m pytest assets/tests/test_pick_table.py
 """
 from pathlib import Path
 

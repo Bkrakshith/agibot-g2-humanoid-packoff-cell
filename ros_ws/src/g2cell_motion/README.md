@@ -67,6 +67,6 @@ Parameters: `g2cell_bringup/config/cell_params.yaml` (`rate_hz`, `max_joint_vel`
 
 ## Tests
 
-`/home/rakshith/ntu_dev/Agibot_dev/.venv-tools/bin/python -m pytest -q test` (from this folder): 108 tests.
+`../.venv-tools/bin/python -m pytest -q test` (from this folder): 108 tests.
 `ros_ws/scripts/offline_smoke.py` runs motion_server + tasks against a fake robot/move_group on an isolated
 ROS domain (see the top-level README). **Not yet run against the sim.**

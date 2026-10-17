@@ -1,6 +1,6 @@
 """Tests for the three crate assets built by assets/crates/build.py.
 
-Run: /home/rakshith/ntu_dev/Agibot_dev/.venv-tools/bin/python -m pytest assets/tests/test_crates.py
+Run: ../.venv-tools/bin/python -m pytest assets/tests/test_crates.py
 """
 
 from pathlib import Path

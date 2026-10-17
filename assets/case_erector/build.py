@@ -1,6 +1,6 @@
 """Generator for the `case_erector` asset: generic automatic carton erector (static prop).
 
-Run:  /home/rakshith/ntu_dev/Agibot_dev/.venv-tools/bin/python assets/case_erector/build.py
+Run:  ../.venv-tools/bin/python assets/case_erector/build.py
 (build assets/cartons first: the magazine references cartons/carton_flat_stack).
 Writes case_erector.usda, geo.usda, physics.usda, README.md next to this script.
 

@@ -21,7 +21,7 @@ Method
   additionally reruns the exact MoveIt reach_check orientation set (8 yaws x tilts 0/+-20/40, 6-D IK).
 * Kinematics only: no self- or environment-collision checking (reach_check used avoid_collisions=False).
 
-Rerun:  /home/rakshith/ntu_dev/Agibot_dev/.venv-reach/bin/python tools/reach_envelope.py [--urdf PATH]
+Rerun:  python tools/reach_envelope.py [--urdf PATH]   (needs numpy and a URDF of the G2; see G2_URDF below)
         (from g2_packoff_cell/; ~ a few minutes on 32 cores). Outputs go to output/reach/.
 Waist:  ... tools/reach_envelope.py --waist-yaw [-100,-90:90:15,100]  -> g2_reach_envelope_waist.png,
         reach_summary_waist.json, reach_grid_waist.npz: top-down reach per waist yaw (idx05_body_joint5),
@@ -46,9 +46,12 @@ import numpy as np  # noqa: E402
 
 HERE = Path(__file__).resolve().parent
 CELL = HERE.parent
-DEFAULT_URDF = Path("/home/rakshith/ntu_dev/Agibot_dev/g2_viz_ws/g2_crs_omnipicker.urdf")
-BASE_STL = Path("/home/rakshith/ntu_dev/Agibot_dev/g2_viz_ws/install/genie_sim_robot_model/share/"
-                "genie_sim_robot_model/robots/genie/g2/meshes/G2/base_link.STL")
+# The G2 URDF and base mesh come from a genie_sim robot-model workspace next to this repository;
+# override with G2_URDF and G2_BASE_STL.
+_WORK = CELL.parent
+DEFAULT_URDF = Path(os.environ.get("G2_URDF", _WORK / "g2_viz_ws" / "g2_crs_omnipicker.urdf"))
+BASE_STL = Path(os.environ.get("G2_BASE_STL", _WORK / "g2_viz_ws" / "install" / "genie_sim_robot_model" / "share"
+                / "genie_sim_robot_model" / "robots" / "genie" / "g2" / "meshes" / "G2" / "base_link.STL"))
 OUT = CELL / "output" / "reach"
 
 TOOL_OFFSET = 0.125

@@ -1,6 +1,6 @@
 """Generate the chilled-factory room asset (assets/room/*.usda).
 
-Run: /home/rakshith/ntu_dev/Agibot_dev/.venv-tools/bin/python assets/room/build.py [--light-scale 1.0]
+Run: ../.venv-tools/bin/python assets/room/build.py [--light-scale 1.0]
 
 Origin = cell origin (G2 robot base) on the floor. The 10 x 10 m room spans
 X [-4.5, 5.5], Y [-5, 5] (outer wall faces), so the rack at X -0.78, the conveyor

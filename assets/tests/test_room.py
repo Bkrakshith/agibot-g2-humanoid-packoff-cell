@@ -1,6 +1,6 @@
 """Tests for the room (environment) asset built by assets/room/build.py.
 
-Run: /home/rakshith/ntu_dev/Agibot_dev/.venv-tools/bin/python -m pytest assets/tests/test_room.py
+Run: ../.venv-tools/bin/python -m pytest assets/tests/test_room.py
 """
 
 from pathlib import Path

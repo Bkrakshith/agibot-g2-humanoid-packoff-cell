@@ -62,7 +62,7 @@ This starts a fake sim on an isolated domain and checks the whole ROS path: `/jo
 domain 0. With `--serve` it only runs the fake sim, so `run_training_solutions.sh` can be run
 against it on the same domain.
 
-Host unit tests (no ROS): `/home/rakshith/ntu_dev/Agibot_dev/.venv-tools/bin/python -m pytest -q test`.
+Host unit tests (no ROS): `../.venv-tools/bin/python -m pytest -q test`.
 
 ## How it works
 

@@ -24,7 +24,7 @@ ros2 run g2cell_bringup check_stack
 `motion_server` refuses to start while the keyboard teleop or `pick_place_demo` publishes `/joint_command`;
 teleop sessions and the cell stack are mutually exclusive.
 
-Tests: `/home/rakshith/ntu_dev/Agibot_dev/.venv-tools/bin/python -m pytest -q test` (34: object relay logic 15, grasp assist 12
+Tests: `../.venv-tools/bin/python -m pytest -q test` (34: object relay logic 15, grasp assist 12
 incl. the USD adapters on an in-memory stage, check_stack logic, launch files compile). The launch files were only parsed (`ros2 launch ... --show-args`), not run against the sim.
 
 ## Object pose relay (`object_relay.py`, `engine_objrelay.py`)

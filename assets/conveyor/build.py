@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 """Generator for the `conveyor` asset (powered roller conveyor, zero-pressure accumulation).
 
-Run:  /home/rakshith/ntu_dev/Agibot_dev/.venv-tools/bin/python assets/conveyor/build.py
+Run:  ../.venv-tools/bin/python assets/conveyor/build.py
 Writes conveyor.usda, geo.usda, physics.usda next to this script (never hand-edit them).
 
 Asset frame (see assets/CONVENTIONS.md): origin = centre of footprint on the floor, Z up,

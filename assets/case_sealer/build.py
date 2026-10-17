@@ -1,6 +1,6 @@
 """Generator for the `case_sealer` asset: generic top + bottom tape case sealer (static prop).
 
-Run:  /home/rakshith/ntu_dev/Agibot_dev/.venv-tools/bin/python assets/case_sealer/build.py
+Run:  ../.venv-tools/bin/python assets/case_sealer/build.py
 Writes case_sealer.usda, geo.usda, physics.usda, README.md next to this script.
 
 Asset frame (assets/CONVENTIONS.md): metres, Z up, origin = centre of the 1.0 (X) x 1.6 (Y)
