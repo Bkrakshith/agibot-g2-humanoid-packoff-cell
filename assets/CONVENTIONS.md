@@ -25,8 +25,8 @@ assets/<name>/
   README.md      one table: spec value, modelled value, source
 ```
 
-- Build every asset from a **generator script** `assets/<name>/build.py` (pxr only; run with
-  `/home/rakshith/ntu_dev/Agibot_dev/.venv-tools/bin/python`). The .usda files are its output and
+- Build every asset from a **generator script** `assets/<name>/build.py` (pxr only; run with the
+  host tools environment, `.venv-tools`, see the README). The .usda files are its output and
   are regenerated, never hand-edited.
 - Prefer simple primitives/meshes with sensible triangle counts; no external textures yet.
 - Physics materials: stainless 0.3 static/dynamic friction, HDPE 0.5, rubber/pads 1.0.

@@ -101,6 +101,9 @@ from simulation.
   - `geniesim_assets/`, the HuggingFace `agibot-world/GenieSimAssets` subset: package files,
     `scenes/GDK/**`, `robot/G2_omnipicker/**`
 - Approximately 60 GB of free disk (base image 23 GB + Genie Sim layers + caches)
+- A host Python environment for the asset generators and their tests, `.venv-tools`, in the work folder
+  next to this repository: `python3 -m venv ../.venv-tools && ../.venv-tools/bin/pip install usd-core numpy pytest`.
+  Commands below that start with `../.venv-tools/bin/python` run from the root of this repository.
 
 The three folders are next to each other:
 
@@ -250,8 +253,8 @@ blue is the command. They agree within 0.0012 rad. This episode is from the firs
 Build the scene (host; regenerates `../geniesim_assets/scenes/g2cell/` with copies of all assets), then launch:
 
 ```bash
-/home/rakshith/ntu_dev/Agibot_dev/.venv-tools/bin/python assets/cell/build.py
-/home/rakshith/ntu_dev/Agibot_dev/.venv-tools/bin/python -m pytest -q assets/tests
+../.venv-tools/bin/python assets/cell/build.py
+../.venv-tools/bin/python -m pytest -q assets/tests
 # in the container (stop a running stack first: tmux kill-session -t g2cell)
 PROFILE=collect bash /g2cell_ws/scripts/stage1_up.sh /g2cell_ws/config/scenes/scene_g2cell.yaml   # showcase for videos
 ```
@@ -339,7 +342,7 @@ flowchart TB
 ```
 
 ```bash
-.venv-tools/bin/python assets/cell/build.py          # cell.usda + cell_colliders.json
+../.venv-tools/bin/python assets/cell/build.py          # cell.usda + cell_colliders.json
 tmux kill-session -t g2cell
 PROFILE=showcase WITH_MOVEIT=1 bash /g2cell_ws/scripts/mobile_up.sh   # mobile scene + move_group (G2 starts at (-2, 0)); lidars off
 ros2 run g2cell_demo drive_in                        # drive into the U only (closed loop on /odom)
@@ -453,7 +456,7 @@ Writing a new use case (say, "re-arrange bags in the crate"):
    motion_server, pick_bag_server and cell_manager against a fake robot and a fake move_group. It uses an isolated domain,
    localhost-only discovery, and every robot topic/service remapped under `/offline/`. Extend it for the new node.
 
-Host tests: `/home/rakshith/ntu_dev/Agibot_dev/.venv-tools/bin/python -m pytest -q test` in each package folder
+Host tests: `../.venv-tools/bin/python -m pytest -q test` in each package folder
 (g2cell_learning: `../.venv-learn`, see its README).
 
 ### Pilot dataset and first training run

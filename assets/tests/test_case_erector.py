@@ -1,6 +1,6 @@
 """Tests for assets/case_erector (static automatic carton erector prop, outfeed -> conveyor +Y end).
 
-Run: /home/rakshith/ntu_dev/Agibot_dev/.venv-tools/bin/python -m pytest assets/tests/test_case_erector.py
+Run: ../.venv-tools/bin/python -m pytest assets/tests/test_case_erector.py
 """
 
 import re

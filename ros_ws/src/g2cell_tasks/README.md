@@ -58,6 +58,6 @@ The TODOs are in `cell_state.py`.
 
 ## Tests
 
-`/home/rakshith/ntu_dev/Agibot_dev/.venv-tools/bin/python -m pytest -q test`: 77 tests (state machine, stage runner,
+`../.venv-tools/bin/python -m pytest -q test`: 77 tests (state machine, stage runner,
 outcome, reachability, sorting, bags, waypoints, cell state, grasp heuristic, config, and sync with the interface
 constants). Offline replay of the whole PickBag against a standalone move_group: `tools/perf/pickbag_replay.py`.

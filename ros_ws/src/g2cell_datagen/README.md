@@ -182,7 +182,7 @@ where they were (`teleport`); unreachable far corner and rack transfers (region 
 
 ```bash
 cd ros_ws/src/g2cell_datagen
-/home/rakshith/ntu_dev/Agibot_dev/.venv-tools/bin/python -m pytest -q test     # 93 passed
+../.venv-tools/bin/python -m pytest -q test     # 93 passed
 ```
 
 The tests cover: randomisation ranges, reachability, footprint and overlap checks; determinism and resume

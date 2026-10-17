@@ -1,7 +1,7 @@
 """Generate the corrugated carton assets (pxr only).
 
 Run:
-    /home/rakshith/ntu_dev/Agibot_dev/.venv-tools/bin/python assets/cartons/build.py [--contents-mass KG]
+    ../.venv-tools/bin/python assets/cartons/build.py [--contents-mass KG]
 
 Writes, for each variant (carton_open, carton_sealed, carton_flat, carton_flat_stack):
     assets/cartons/<name>/<name>.usda   root: defaultPrim (Xform, kind=component),

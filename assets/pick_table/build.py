@@ -1,6 +1,6 @@
 """Generator for the pick_table asset (infeed / accumulation table).
 
-Run: /home/rakshith/ntu_dev/Agibot_dev/.venv-tools/bin/python assets/pick_table/build.py
+Run: ../.venv-tools/bin/python assets/pick_table/build.py
 Outputs pick_table.usda (root), geo.usda, physics.usda next to this file. Never hand-edit them.
 
 Local frame: origin = footprint centre on the floor, Z up, metres.

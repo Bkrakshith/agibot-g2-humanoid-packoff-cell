@@ -1,6 +1,6 @@
 """Generator for the sort_rack asset (angled gravity-flow / tote-presentation rack).
 
-Run: /home/rakshith/ntu_dev/Agibot_dev/.venv-tools/bin/python assets/sort_rack/build.py
+Run: ../.venv-tools/bin/python assets/sort_rack/build.py
 Outputs sort_rack.usda (root), geo.usda, physics.usda next to this file. Never hand-edit them.
 
 Local frame: origin = footprint centre on the floor, Z up, metres. The open, tote-facing front

@@ -48,7 +48,7 @@ exporter; the dataset card still lists them.
 ## Setup (CPU venv)
 
 ```bash
-/home/rakshith/miniconda3/bin/conda create -y -p ../.venv-learn python=3.11   # from Agibot_dev/
+conda create -y -p ../.venv-learn python=3.11   # from the work folder next to this repository
 ../.venv-learn/bin/pip install torch torchvision --index-url https://download.pytorch.org/whl/cpu
 ../.venv-learn/bin/pip install numpy h5py pyarrow pytest av matplotlib
 ```

@@ -1,6 +1,6 @@
 """Generator for the `floor_bin` asset: open-top red HDPE reject/overflow bin on 4 castors.
 
-Run:  /home/rakshith/ntu_dev/Agibot_dev/.venv-tools/bin/python assets/floor_bin/build.py
+Run:  ../.venv-tools/bin/python assets/floor_bin/build.py
 Writes floor_bin.usda, geo.usda, physics.usda, README.md next to this script.
 
 Asset frame (assets/CONVENTIONS.md): metres, Z up, origin = centre of the 0.6 (X) x 0.8 (Y)

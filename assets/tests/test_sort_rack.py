@@ -1,6 +1,6 @@
 """Tests for assets/sort_rack (angled gravity-flow tote rack behind the robot).
 
-Run: /home/rakshith/ntu_dev/Agibot_dev/.venv-tools/bin/python -m pytest assets/tests/test_sort_rack.py
+Run: ../.venv-tools/bin/python -m pytest assets/tests/test_sort_rack.py
 """
 import math
 from pathlib import Path

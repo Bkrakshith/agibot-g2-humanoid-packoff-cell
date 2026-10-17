@@ -1,6 +1,6 @@
 """Tests for the background props asset built by assets/props/build.py.
 
-Run: /home/rakshith/ntu_dev/Agibot_dev/.venv-tools/bin/python -m pytest assets/tests/test_props.py
+Run: ../.venv-tools/bin/python -m pytest assets/tests/test_props.py
 """
 
 from pathlib import Path

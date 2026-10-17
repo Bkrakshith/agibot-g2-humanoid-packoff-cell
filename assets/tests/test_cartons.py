@@ -1,6 +1,6 @@
 """Tests for the corrugated carton assets built by assets/cartons/build.py.
 
-Run: /home/rakshith/ntu_dev/Agibot_dev/.venv-tools/bin/python -m pytest assets/tests/test_cartons.py
+Run: ../.venv-tools/bin/python -m pytest assets/tests/test_cartons.py
 """
 
 import re
